@@ -1,0 +1,29 @@
+# Python bytecode and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local secrets and environment configuration
+.env
+.env.*
+!.env.example
+
+# Local databases and SQLite sidecar files (may contain user data)
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+
+# Generated lookup log
+data/unmatched.jsonl
+
+# Local logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db

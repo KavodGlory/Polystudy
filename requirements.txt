@@ -1,0 +1,8 @@
+flask>=3.0       # web interface
+pypdf>=4.0       # reading PDF files (without it, PDFs fall back to the pdftotext tool if installed)
+pytest>=8.0      # tests only
+reportlab>=4.0   # tests only: builds sample PDFs (the PDF tests skip themselves without it)
+# No extra package is needed for the Gemini API — gemini_api.py uses only the standard library.
+# If you prefer the official SDK, you can optionally install:
+#   pip install google-generativeai
+

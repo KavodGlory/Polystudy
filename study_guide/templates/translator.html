@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Translator{% endblock %}
+{% block breadcrumb %}Translator{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div><p class="eyebrow">LANGUAGE TOOLKIT</p><h1>Translate your materials</h1><p class="lead">Bring class notes and documents into a language that works for you. The original content stays in your browser until you submit it for translation.</p></div>
+  <span class="demo-tag">9 languages</span>
+</div>
+{% if not ai_on %}<div class="notice">Live AI translation is not configured. Set <code>GEMINI_API_KEY</code> in the server environment and restart to enable text and document translation. Never place the key in this page or in source code.</div>{% endif %}
+<div class="tool-layout">
+  <section class="card">
+    <div class="lang-row">
+      <div class="field"><label for="source-language">Translate from</label><select class="language-select" id="source-language"><option value="auto">Detect language</option>{% for language in languages %}<option value="{{ language.code }}">{{ language.name }}{% if language.native != language.name %} · {{ language.native }}{% endif %}</option>{% endfor %}</select></div>
+      <button class="swap" id="swap-languages" type="button" aria-label="Swap source and target languages">⇄</button>
+      <div class="field"><label for="target-language">Translate to</label><select class="language-select" id="target-language">{% for language in languages %}<option value="{{ language.code }}">{{ language.name }}{% if language.native != language.name %} · {{ language.native }}{% endif %}</option>{% endfor %}</select></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Translation input type">
+      <button class="button small" id="text-tab" type="button" aria-selected="true">Write or paste</button>
+      <button class="button small secondary" id="file-tab" type="button" aria-selected="false">Upload a document</button>
+    </div>
+    <section id="text-panel">
+      <div class="field" style="margin-top:14px"><label for="source-text">Text or study notes</label><textarea id="source-text" maxlength="20000" placeholder="Paste a paragraph, lecture notes, or a question…"></textarea></div>
+      <button class="button" id="translate-text" type="button">Translate text <span aria-hidden="true">→</span></button>
+    </section>
+    <section id="file-panel" hidden>
+      <div class="field" style="margin-top:14px"><label for="document-file">Choose a PDF, TXT, or Markdown file (up to {{ max_mb }} MB)</label><input id="document-file" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain,text/markdown"></div>
+      <button class="button" id="translate-file" type="button" style="margin-top:14px">Translate document <span aria-hidden="true">→</span></button>
+      <p class="result-meta">PDF, TXT and MD supported. Submitting sends your content to the configured AI provider for translation. Avoid uploading confidential or sensitive material.</p>
+    </section>
+  </section>
+  <section class="card">
+    <div class="card-heading"><div><h2>Your translation</h2><p id="translation-status">The translated version will appear here.</p></div></div>
+    <div class="output-title" id="output-title" hidden>TRANSLATION</div>
+    <div class="output-box" id="translation-output" aria-live="polite">Start with text or choose a document to translate.</div>
+    <div class="result-meta" id="translation-meta"></div>
+    <div style="margin-top:15px"><button class="button secondary small" id="copy-translation" type="button" hidden>Copy translation</button></div>
+  </section>
+</div>
+<p class="result-meta" style="margin-top:18px">Translations can be imperfect. Verify important academic, legal, medical or financial information with a qualified person.</p>
+{% endblock %}

@@ -1,0 +1,1638 @@
+"""[{"id": "habari","category": "greetings","aliases": ["habari","habari yako","habari gani"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Hello / how are you? (literally 'what news?')",
+"note": "Typical replies: 'nzuri' (good) or 'salama' (peaceful). Works at any time of day.",
+"translations": {
+"ar": "مرحباً، كيف حالك؟",
+"fr": "Bonjour, comment ça va ?",
+"ja": "こんにちは、お元気ですか？",
+"es": "Hola, ¿cómo estás?",
+"zh": "你好，你好吗？",
+"de": "Hallo, wie geht's?"
+},
+"needs_review": false
+},
+{
+"id": "hujambo",
+"category": "greetings",
+"aliases": [
+"hujambo",
+"jambo",
+"hamjambo"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Hello (literally 'you have no problem?')",
+"note": "'Hujambo?' is answered 'sijambo'. 'Hamjambo' greets several people. 'Jambo' is the form tourists hear most.",
+"translations": {
+"ar": "مرحباً",
+"fr": "Bonjour",
+"ja": "こんにちは",
+"es": "Hola",
+"zh": "你好",
+"de": "Guten Tag"
+},
+"needs_review": false
+},
+{
+"id": "shikamoo",
+"category": "greetings",
+"aliases": [
+"shikamoo"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Respectful greeting to an elder (literally 'I hold your feet')",
+"note": "The reply is 'marahaba'. Use it for people clearly older or senior to you; it is more common on the coast and upcountry than among young Nairobians.",
+"translations": {
+"ar": "أحييك باحترام (تحية للكبار في السن)",
+"fr": "Mes respects (salutation à une personne plus âgée)",
+"ja": "ご挨拶申し上げます（目上の方への敬意を込めた挨拶）",
+"es": "Mis respetos (saludo a una persona mayor)",
+"zh": "您好（对长辈表示尊敬的问候）",
+"de": "Ich grüße Sie respektvoll (Gruß an ältere Personen)"
+},
+"needs_review": true,
+"review_note": "Arabic, Japanese and Chinese versions describe the meaning rather than a fixed equivalent; there is no exact counterpart."
+},
+{
+"id": "asante",
+"category": "greetings",
+"aliases": [
+"asante",
+"asante sana",
+"shukrani"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Thank you ('sana' = very much)",
+"note": "The usual reply is 'karibu'.",
+"translations": {
+"ar": "شكراً جزيلاً",
+"fr": "Merci beaucoup",
+"ja": "どうもありがとうございます",
+"es": "Muchas gracias",
+"zh": "非常感谢",
+"de": "Vielen Dank"
+},
+"needs_review": false
+},
+{
+"id": "karibu",
+"category": "greetings",
+"aliases": [
+"karibu",
+"karibu sana",
+"karibuni"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Welcome / you're welcome / come in",
+"note": "Also the standard reply to 'asante'. 'Karibuni' welcomes several people. It can also mean 'near'.",
+"translations": {
+"ar": "أهلاً وسهلاً",
+"fr": "Bienvenue",
+"ja": "ようこそ",
+"es": "Bienvenido/a",
+"zh": "欢迎",
+"de": "Willkommen"
+},
+"needs_review": false
+},
+{
+"id": "kwaheri",
+"category": "greetings",
+"aliases": [
+"kwaheri",
+"kwaherini"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Goodbye",
+"note": "'Kwaherini' is said to more than one person.",
+"translations": {
+"ar": "مع السلامة",
+"fr": "Au revoir",
+"ja": "さようなら",
+"es": "Adiós",
+"zh": "再见",
+"de": "Auf Wiedersehen"
+},
+"needs_review": false
+},
+{
+"id": "tutaonana",
+"category": "greetings",
+"aliases": [
+"tutaonana",
+"tutaonana baadaye"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "See you (later)",
+"note": "Literally 'we will see each other'.",
+"translations": {
+"ar": "أراك لاحقاً",
+"fr": "À plus tard",
+"ja": "また後で",
+"es": "Hasta luego",
+"zh": "回头见",
+"de": "Bis später"
+},
+"needs_review": false
+},
+{
+"id": "hongera",
+"category": "greetings",
+"aliases": [
+"hongera",
+"hongereni"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Congratulations",
+"note": "'Hongereni' congratulates several people.",
+"translations": {
+"ar": "مبروك",
+"fr": "Félicitations",
+"ja": "おめでとうございます",
+"es": "Felicidades",
+"zh": "恭喜",
+"de": "Herzlichen Glückwunsch"
+},
+"needs_review": false
+},
+{
+"id": "tafadhali",
+"category": "politeness",
+"aliases": [
+"tafadhali",
+"tafadhali sana"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Please",
+"note": "In everyday speech people more often say 'naomba' (I request), e.g. 'Naomba maji'.",
+"translations": {
+"ar": "من فضلك",
+"fr": "S'il vous plaît",
+"ja": "お願いします",
+"es": "Por favor",
+"zh": "请",
+"de": "Bitte"
+},
+"needs_review": false
+},
+{
+"id": "naomba",
+"category": "politeness",
+"aliases": [
+"naomba"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "May I have... / I would like... (polite request)",
+"note": "Put the thing you want after it: 'Naomba chai' (I'd like tea).",
+"translations": {
+"ar": "أرجو أن تعطيني...",
+"fr": "Puis-je avoir... / Je voudrais...",
+"ja": "…をお願いします",
+"es": "Quisiera... / ¿Me da...?",
+"zh": "我想要……／请给我……",
+"de": "Ich hätte gern... / Könnte ich ... haben?"
+},
+"needs_review": false
+},
+{
+"id": "samahani",
+"category": "politeness",
+"aliases": [
+"samahani"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Excuse me / pardon me / sorry (for a mistake)",
+"note": "Use it to get attention or to apologise. Different from 'pole', which expresses sympathy.",
+"translations": {
+"ar": "عفواً، المعذرة",
+"fr": "Excusez-moi / pardon",
+"ja": "すみません",
+"es": "Disculpe / perdón",
+"zh": "不好意思，对不起",
+"de": "Entschuldigung"
+},
+"needs_review": false
+},
+{
+"id": "pole",
+"category": "politeness",
+"aliases": [
+"pole",
+"pole sana"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Sorry (sympathy for someone's trouble, tiredness or bad luck)",
+"note": "Said to someone who is sick, tired after work, or has had bad news. It is not an apology for your own mistake.",
+"translations": {
+"ar": "أتعاطف معك",
+"fr": "Je suis désolé(e) pour toi / courage",
+"ja": "それはお気の毒に／お疲れさま",
+"es": "Lo siento mucho / ánimo",
+"zh": "真遗憾／辛苦了",
+"de": "Das tut mir leid"
+},
+"needs_review": true,
+"review_note": "'Pole' covers several English situations (sympathy, 'well done on your hard work'); check each rendering fits."
+},
+{
+"id": "pole_pole",
+"category": "politeness",
+"aliases": [
+"pole pole",
+"polepole"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Slowly, slowly / take it easy",
+"note": "A well-known piece of advice, e.g. for climbing Kilimanjaro or for stress.",
+"translations": {
+"ar": "على مهلك، ببطء",
+"fr": "Doucement, doucement",
+"ja": "ゆっくり、ゆっくり",
+"es": "Poco a poco, con calma",
+"zh": "慢慢来",
+"de": "Immer mit der Ruhe"
+},
+"needs_review": false
+},
+{
+"id": "hakuna_matata",
+"category": "politeness",
+"aliases": [
+"hakuna matata",
+"hakuna shida"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "No worries / no problem",
+"note": "Literally 'there are no troubles'. 'Hakuna shida' is the form locals use more in daily speech.",
+"translations": {
+"ar": "لا مشكلة",
+"fr": "Pas de souci",
+"ja": "問題ないよ",
+"es": "No hay problema",
+"zh": "没问题",
+"de": "Kein Problem"
+},
+"needs_review": false
+},
+{
+"id": "ndio",
+"category": "communication",
+"aliases": [
+"ndio",
+"ndiyo"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Yes",
+"note": "",
+"translations": {
+"ar": "نعم",
+"fr": "Oui",
+"ja": "はい",
+"es": "Sí",
+"zh": "是的",
+"de": "Ja"
+},
+"needs_review": false
+},
+{
+"id": "hapana",
+"category": "communication",
+"aliases": [
+"hapana"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "No",
+"note": "A firm but polite 'no thanks' is 'hapana, asante'.",
+"translations": {
+"ar": "لا",
+"fr": "Non",
+"ja": "いいえ",
+"es": "No",
+"zh": "不／不是",
+"de": "Nein"
+},
+"needs_review": false
+},
+{
+"id": "sawa",
+"category": "communication",
+"aliases": [
+"sawa",
+"sawa sawa"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "OK / alright / fine",
+"note": "'Sawa?' asks 'is that OK?'. 'Sawa sawa' means 'all good'.",
+"translations": {
+"ar": "حسناً",
+"fr": "D'accord",
+"ja": "わかりました",
+"es": "Vale / de acuerdo",
+"zh": "好的",
+"de": "Okay, einverstanden"
+},
+"needs_review": false
+},
+{
+"id": "naitwa",
+"category": "communication",
+"aliases": [
+"naitwa",
+"jina langu ni"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "My name is ...",
+"note": "Follow with your name, e.g. 'Naitwa Aiko'.",
+"translations": {
+"ar": "اسمي ...",
+"fr": "Je m'appelle ...",
+"ja": "私の名前は…です",
+"es": "Me llamo ...",
+"zh": "我叫……",
+"de": "Ich heiße ..."
+},
+"needs_review": false
+},
+{
+"id": "jina_lako",
+"category": "communication",
+"aliases": [
+"jina lako nani",
+"unaitwa nani"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "What is your name?",
+"note": "",
+"translations": {
+"ar": "ما اسمك؟",
+"fr": "Comment tu t'appelles ?",
+"ja": "お名前は何ですか？",
+"es": "¿Cómo te llamas?",
+"zh": "你叫什么名字？",
+"de": "Wie heißt du?"
+},
+"needs_review": false
+},
+{
+"id": "sielewi",
+"category": "communication",
+"aliases": [
+"sielewi",
+"sijaelewa"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I don't understand",
+"note": "Pair with 'sema polepole tafadhali' (please speak slowly).",
+"translations": {
+"ar": "لا أفهم",
+"fr": "Je ne comprends pas",
+"ja": "わかりません",
+"es": "No entiendo",
+"zh": "我不明白",
+"de": "Ich verstehe nicht"
+},
+"needs_review": false
+},
+{
+"id": "kiingereza",
+"category": "communication",
+"aliases": [
+"unaongea kiingereza",
+"unazungumza kiingereza",
+"do you speak english"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Do you speak English?",
+"note": "Most people in cities and on campuses do, but asking first is polite.",
+"translations": {
+"ar": "هل تتحدث الإنجليزية؟",
+"fr": "Parlez-vous anglais ?",
+"ja": "英語を話せますか？",
+"es": "¿Habla inglés?",
+"zh": "你会说英语吗？",
+"de": "Sprechen Sie Englisch?"
+},
+"needs_review": false
+},
+{
+"id": "sema_polepole",
+"category": "communication",
+"aliases": [
+"sema polepole",
+"sema pole pole",
+"ongea polepole",
+"speak slowly"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Please speak slowly",
+"note": "Add 'tafadhali' to be extra polite.",
+"translations": {
+"ar": "تحدث ببطء من فضلك",
+"fr": "Parlez lentement, s'il vous plaît",
+"ja": "ゆっくり話してください",
+"es": "Hable despacio, por favor",
+"zh": "请说慢一点",
+"de": "Bitte sprechen Sie langsam"
+},
+"needs_review": false
+},
+{
+"id": "sijui",
+"category": "communication",
+"aliases": [
+"sijui"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I don't know",
+"note": "",
+"translations": {
+"ar": "لا أعرف",
+"fr": "Je ne sais pas",
+"ja": "わかりません",
+"es": "No lo sé",
+"zh": "我不知道",
+"de": "Ich weiß nicht"
+},
+"needs_review": false
+},
+{
+"id": "matatu",
+"category": "transport",
+"aliases": [
+"matatu",
+"matatus",
+"mathree"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "Privately owned minibus used as public transport",
+"note": "Fares can rise at rush hour and when it rains. Ask the conductor the fare before you sit. 'Mathree' is the Sheng form.",
+"translations": {
+"ar": "حافلة صغيرة (ماتاتو)",
+"fr": "Minibus de transport public (matatu)",
+"ja": "ミニバス（マタトゥ）",
+"es": "Microbús de transporte público (matatu)",
+"zh": "小巴（马塔图）",
+"de": "Minibus (Matatu)"
+},
+"needs_review": false
+},
+{
+"id": "boda",
+"category": "transport",
+"aliases": [
+"boda boda",
+"boda",
+"bodaboda"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "Motorbike taxi",
+"note": "Fast and cheap but riskier than a car. Agree on the price first and ask for a helmet.",
+"translations": {
+"ar": "دراجة نارية أجرة",
+"fr": "Moto-taxi",
+"ja": "バイクタクシー",
+"es": "Mototaxi",
+"zh": "摩托车出租车（摩的）",
+"de": "Motorradtaxi"
+},
+"needs_review": false
+},
+{
+"id": "stage",
+"category": "transport",
+"aliases": [
+"stage",
+"matatu stage",
+"bus stage"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "Matatu / bus stop",
+"note": "Pick-up points are called stages, and each route usually has its own.",
+"translations": {
+"ar": "محطة الحافلات",
+"fr": "Arrêt de bus / station de matatu",
+"ja": "バス停（マタトゥ乗り場）",
+"es": "Parada de autobús (de matatus)",
+"zh": "公交站／小巴站",
+"de": "Bushaltestelle (Matatu-Haltestelle)"
+},
+"needs_review": false
+},
+{
+"id": "nauli_ngapi",
+"category": "transport",
+"aliases": [
+"nauli ni ngapi",
+"nauli ngapi",
+"how much is the fare"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "How much is the fare?",
+"note": "'Nauli' = transport fare.",
+"translations": {
+"ar": "كم الأجرة؟",
+"fr": "C'est combien le trajet ?",
+"ja": "運賃はいくらですか？",
+"es": "¿Cuánto es el pasaje?",
+"zh": "车费多少钱？",
+"de": "Wie viel kostet die Fahrt?"
+},
+"needs_review": false
+},
+{
+"id": "nishuke",
+"category": "transport",
+"aliases": [
+"naomba nishuke",
+"nishuke hapa",
+"nishushe hapa",
+"let me down here"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I would like to get off here",
+"note": "Tell the driver or conductor before your stop so they can pull over.",
+"translations": {
+"ar": "أريد النزول هنا",
+"fr": "Je voudrais descendre ici",
+"ja": "ここで降ります",
+"es": "Quiero bajarme aquí",
+"zh": "我要在这里下车",
+"de": "Ich möchte hier aussteigen"
+},
+"needs_review": true,
+"review_note": "'Nishushe hapa' means 'drop me here' (asking the driver); 'nishuke hapa' means 'let me get off here'. Both are rendered the same."
+},
+{
+"id": "maji",
+"category": "food",
+"aliases": [
+"maji"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Water",
+"note": "",
+"translations": {
+"ar": "ماء",
+"fr": "De l'eau",
+"ja": "水",
+"es": "Agua",
+"zh": "水",
+"de": "Wasser"
+},
+"needs_review": false
+},
+{
+"id": "chakula",
+"category": "food",
+"aliases": [
+"chakula"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Food",
+"note": "",
+"translations": {
+"ar": "طعام",
+"fr": "De la nourriture",
+"ja": "食べ物",
+"es": "Comida",
+"zh": "食物",
+"de": "Essen"
+},
+"needs_review": false
+},
+{
+"id": "naomba_maji",
+"category": "food",
+"aliases": [
+"naomba maji",
+"nipe maji"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "May I have some water?",
+"note": "'Naomba' is polite; 'nipe' (give me) is more direct.",
+"translations": {
+"ar": "هل يمكنني الحصول على ماء؟",
+"fr": "Puis-je avoir de l'eau, s'il vous plaît ?",
+"ja": "お水をいただけますか？",
+"es": "¿Me da agua, por favor?",
+"zh": "请给我一点水",
+"de": "Könnte ich bitte Wasser haben?"
+},
+"needs_review": false
+},
+{
+"id": "chai",
+"category": "food",
+"aliases": [
+"chai",
+"chai ya maziwa"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Tea (usually brewed with milk and sugar)",
+"note": "Say 'bila sukari' for 'without sugar'.",
+"translations": {
+"ar": "شاي (بالحليب غالباً)",
+"fr": "Du thé (souvent au lait)",
+"ja": "紅茶（ミルク入りが一般的）",
+"es": "Té (normalmente con leche)",
+"zh": "茶（通常加牛奶）",
+"de": "Tee (meist mit Milch)"
+},
+"needs_review": false
+},
+{
+"id": "nyama_choma",
+"category": "food",
+"aliases": [
+"nyama choma"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Grilled meat",
+"note": "Usually goat or beef, shared with friends and eaten with ugali or kachumbari. A very social meal.",
+"translations": {
+"ar": "لحم مشوي",
+"fr": "Viande grillée",
+"ja": "焼き肉（ニャマ・チョマ）",
+"es": "Carne a la parrilla (nyama choma)",
+"zh": "烤肉（nyama choma）",
+"de": "Gegrilltes Fleisch (Nyama Choma)"
+},
+"needs_review": false
+},
+{
+"id": "ugali",
+"category": "food",
+"aliases": [
+"ugali"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Stiff maize-flour porridge, a staple food",
+"note": "Eaten with the hands, usually with stew or greens.",
+"translations": {
+"ar": "أوغالي (عصيدة الذرة)",
+"fr": "Ugali (bouillie épaisse de maïs)",
+"ja": "ウガリ（トウモロコシ粉の練り粥）",
+"es": "Ugali (masa espesa de harina de maíz)",
+"zh": "ugali（玉米面糊）",
+"de": "Ugali (fester Maisbrei)"
+},
+"needs_review": false
+},
+{
+"id": "sukuma",
+"category": "food",
+"aliases": [
+"sukuma wiki",
+"sukuma"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Collard greens (literally 'push the week')",
+"note": "A cheap everyday vegetable; the name means it helps you stretch the week's budget.",
+"translations": {
+"ar": "كرنب أخضر (سوكوما ويكي)",
+"fr": "Chou vert (sukuma wiki)",
+"ja": "コラードグリーン（スクマ・ウィキ）",
+"es": "Col verde (sukuma wiki)",
+"zh": "甘蓝叶菜（sukuma wiki）",
+"de": "Collard Greens (Sukuma Wiki)"
+},
+"needs_review": true,
+"review_note": "Plant name differs by country (collard vs kale); check the Chinese and Arabic wording."
+},
+{
+"id": "mandazi",
+"category": "food",
+"aliases": [
+"mandazi",
+"mandaazi"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Fried dough snack, lightly sweet",
+"note": "Often eaten at breakfast or with chai.",
+"translations": {
+"ar": "ماندازي (فطيرة مقلية)",
+"fr": "Mandazi (beignet)",
+"ja": "マンダジ（揚げパン）",
+"es": "Mandazi (buñuelo)",
+"zh": "mandazi（油炸面点）",
+"de": "Mandazi (frittiertes Gebäck)"
+},
+"needs_review": false
+},
+{
+"id": "chapati",
+"category": "food",
+"aliases": [
+"chapati",
+"chapo"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Flat wheat bread",
+"note": "'Chapo' is the casual form.",
+"translations": {
+"ar": "خبز تشاباتي",
+"fr": "Chapati (galette de blé)",
+"ja": "チャパティ",
+"es": "Chapati",
+"zh": "恰巴提饼",
+"de": "Chapati"
+},
+"needs_review": false
+},
+{
+"id": "njaa",
+"category": "food",
+"aliases": [
+"nina njaa"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I am hungry",
+"note": "'Njaa' = hunger.",
+"translations": {
+"ar": "أنا جائع",
+"fr": "J'ai faim",
+"ja": "お腹がすいています",
+"es": "Tengo hambre",
+"zh": "我饿了",
+"de": "Ich habe Hunger"
+},
+"needs_review": false
+},
+{
+"id": "kiu",
+"category": "food",
+"aliases": [
+"nina kiu"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I am thirsty",
+"note": "'Kiu' = thirst.",
+"translations": {
+"ar": "أنا عطشان",
+"fr": "J'ai soif",
+"ja": "喉が渇いています",
+"es": "Tengo sed",
+"zh": "我渴了",
+"de": "Ich habe Durst"
+},
+"needs_review": false
+},
+{
+"id": "bei_gani",
+"category": "money",
+"aliases": [
+"bei gani",
+"ni bei gani",
+"how much is this",
+"how much does it cost",
+"how much"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "How much is this?",
+"note": "Bargaining is normal in markets and with street vendors, but not in supermarkets.",
+"translations": {
+"ar": "بكم هذا؟",
+"fr": "C'est combien ?",
+"ja": "これはいくらですか？",
+"es": "¿Cuánto cuesta esto?",
+"zh": "这个多少钱？",
+"de": "Wie viel kostet das?"
+},
+"needs_review": false
+},
+{
+"id": "ghali",
+"category": "money",
+"aliases": [
+"ghali sana",
+"ni ghali",
+"too expensive"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "That is too expensive",
+"note": "A normal opening move when bargaining; smile while you say it.",
+"translations": {
+"ar": "هذا غالٍ جداً",
+"fr": "C'est trop cher",
+"ja": "高すぎます",
+"es": "Es demasiado caro",
+"zh": "太贵了",
+"de": "Das ist zu teuer"
+},
+"needs_review": false
+},
+{
+"id": "punguza",
+"category": "money",
+"aliases": [
+"punguza bei",
+"punguza bei kidogo",
+"punguza kidogo"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Please reduce the price a little",
+"note": "'Kidogo' = a little.",
+"translations": {
+"ar": "هل يمكنك تخفيض السعر قليلاً؟",
+"fr": "Pouvez-vous baisser un peu le prix ?",
+"ja": "少し安くしてもらえますか？",
+"es": "¿Me puede bajar un poco el precio?",
+"zh": "能便宜一点吗？",
+"de": "Können Sie den Preis etwas senken?"
+},
+"needs_review": false
+},
+{
+"id": "pesa",
+"category": "money",
+"aliases": [
+"pesa",
+"fedha"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Money",
+"note": "",
+"translations": {
+"ar": "مال، نقود",
+"fr": "L'argent",
+"ja": "お金",
+"es": "Dinero",
+"zh": "钱",
+"de": "Geld"
+},
+"needs_review": false
+},
+{
+"id": "mpesa",
+"category": "money",
+"aliases": [
+"mpesa",
+"m-pesa",
+"m pesa"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "M-Pesa mobile money service",
+"note": "Used for taxis, shops, rent and bills. Registration usually needs a Kenyan SIM card and an ID or passport.",
+"translations": {
+"ar": "إم-بيسا (خدمة المال عبر الهاتف)",
+"fr": "M-Pesa (service d'argent mobile)",
+"ja": "エムペサ（モバイルマネーサービス）",
+"es": "M-Pesa (servicio de dinero móvil)",
+"zh": "M-Pesa（手机支付服务）",
+"de": "M-Pesa (mobiles Bezahlsystem)"
+},
+"needs_review": false
+},
+{
+"id": "chenji",
+"category": "money",
+"aliases": [
+"chenji",
+"una chenji",
+"do you have change"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "Change (small money or money returned)",
+"note": "Vendors often ask 'una chenji?'. Carry small notes.",
+"translations": {
+"ar": "الباقي (الفكة)",
+"fr": "La monnaie",
+"ja": "お釣り",
+"es": "El cambio (vuelto)",
+"zh": "找零",
+"de": "Wechselgeld"
+},
+"needs_review": false
+},
+{
+"id": "wapi",
+"category": "directions",
+"aliases": [
+"iko wapi",
+"ni wapi"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Where is it?",
+"note": "Put the place first: 'Maktaba iko wapi?' (where is the library?).",
+"translations": {
+"ar": "أين هو؟",
+"fr": "Où est-ce ?",
+"ja": "どこですか？",
+"es": "¿Dónde está?",
+"zh": "在哪里？",
+"de": "Wo ist das?"
+},
+"needs_review": false
+},
+{
+"id": "choo",
+"category": "directions",
+"aliases": [
+"choo iko wapi",
+"wapi choo",
+"where is the toilet",
+"where is the bathroom"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Where is the toilet?",
+"note": "'Choo' is the everyday word for toilet; 'bafu' is the bathroom or shower.",
+"translations": {
+"ar": "أين الحمّام؟",
+"fr": "Où sont les toilettes ?",
+"ja": "トイレはどこですか？",
+"es": "¿Dónde está el baño?",
+"zh": "洗手间在哪里？",
+"de": "Wo ist die Toilette?"
+},
+"needs_review": false
+},
+{
+"id": "kulia",
+"category": "directions",
+"aliases": [
+"kulia",
+"nenda kulia",
+"geuka kulia",
+"turn right"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Right / turn right",
+"note": "'Kulia' also means 'to cry' or 'to eat' as a verb, so context matters.",
+"translations": {
+"ar": "يميناً",
+"fr": "À droite",
+"ja": "右",
+"es": "A la derecha",
+"zh": "右边",
+"de": "Rechts"
+},
+"needs_review": false
+},
+{
+"id": "kushoto",
+"category": "directions",
+"aliases": [
+"kushoto",
+"nenda kushoto",
+"geuka kushoto",
+"turn left"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Left / turn left",
+"note": "",
+"translations": {
+"ar": "يساراً",
+"fr": "À gauche",
+"ja": "左",
+"es": "A la izquierda",
+"zh": "左边",
+"de": "Links"
+},
+"needs_review": false
+},
+{
+"id": "moja_kwa_moja",
+"category": "directions",
+"aliases": [
+"moja kwa moja",
+"nenda moja kwa moja",
+"go straight"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Straight ahead",
+"note": "Literally 'one to one'.",
+"translations": {
+"ar": "إلى الأمام مباشرة",
+"fr": "Tout droit",
+"ja": "まっすぐ",
+"es": "Todo recto",
+"zh": "一直往前走",
+"de": "Geradeaus"
+},
+"needs_review": false
+},
+{
+"id": "mbali",
+"category": "directions",
+"aliases": [
+"ni mbali",
+"iko mbali",
+"is it far"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Is it far?",
+"note": "'Karibu' means 'near'.",
+"translations": {
+"ar": "هل هو بعيد؟",
+"fr": "C'est loin ?",
+"ja": "遠いですか？",
+"es": "¿Está lejos?",
+"zh": "远吗？",
+"de": "Ist es weit?"
+},
+"needs_review": false
+},
+{
+"id": "msaada",
+"category": "emergency",
+"aliases": [
+"msaada",
+"naomba msaada",
+"nisaidie",
+"help me",
+"i need help"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Help! / I need help",
+"note": "Shouting 'msaada!' will get people's attention.",
+"translations": {
+"ar": "النجدة! أحتاج إلى مساعدة",
+"fr": "Au secours ! J'ai besoin d'aide",
+"ja": "助けてください",
+"es": "¡Ayuda! Necesito ayuda",
+"zh": "救命！我需要帮助",
+"de": "Hilfe! Ich brauche Hilfe"
+},
+"needs_review": false
+},
+{
+"id": "polisi",
+"category": "emergency",
+"aliases": [
+"polisi",
+"piga simu polisi",
+"call the police"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Police / call the police",
+"note": "Kenya's emergency numbers are 999 and 112.",
+"translations": {
+"ar": "اتصلوا بالشرطة",
+"fr": "Appelez la police",
+"ja": "警察を呼んでください",
+"es": "Llamen a la policía",
+"zh": "请报警",
+"de": "Rufen Sie die Polizei"
+},
+"needs_review": false
+},
+{
+"id": "hospitali",
+"category": "emergency",
+"aliases": [
+"hospitali",
+"hospitalini"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Hospital",
+"note": "",
+"translations": {
+"ar": "مستشفى",
+"fr": "Hôpital",
+"ja": "病院",
+"es": "Hospital",
+"zh": "医院",
+"de": "Krankenhaus"
+},
+"needs_review": false
+},
+{
+"id": "nipeleke_hospitali",
+"category": "emergency",
+"aliases": [
+"nipeleke hospitali",
+"nipeleke hospitalini",
+"take me to the hospital"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Take me to the hospital",
+"note": "",
+"translations": {
+"ar": "خذوني إلى المستشفى",
+"fr": "Emmenez-moi à l'hôpital",
+"ja": "病院に連れて行ってください",
+"es": "Llévenme al hospital",
+"zh": "请送我去医院",
+"de": "Bringen Sie mich ins Krankenhaus"
+},
+"needs_review": false
+},
+{
+"id": "daktari",
+"category": "emergency",
+"aliases": [
+"ninahitaji daktari",
+"nahitaji daktari",
+"i need a doctor"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I need a doctor",
+"note": "",
+"translations": {
+"ar": "أحتاج إلى طبيب",
+"fr": "J'ai besoin d'un médecin",
+"ja": "医者が必要です",
+"es": "Necesito un médico",
+"zh": "我需要医生",
+"de": "Ich brauche einen Arzt"
+},
+"needs_review": false
+},
+{
+"id": "naumwa",
+"category": "emergency",
+"aliases": [
+"naumwa",
+"ninaumwa",
+"i am sick",
+"i feel sick"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I am sick / I am in pain",
+"note": "To say where it hurts: 'Kichwa kinaniuma' = my head hurts.",
+"translations": {
+"ar": "أنا مريض",
+"fr": "Je suis malade / j'ai mal",
+"ja": "具合が悪いです／痛みます",
+"es": "Estoy enfermo/a / me duele",
+"zh": "我不舒服／我疼",
+"de": "Ich bin krank / ich habe Schmerzen"
+},
+"needs_review": true,
+"review_note": "Covers both 'sick' and 'in pain'; pick the nearest meaning per language."
+},
+{
+"id": "moto_fire",
+"category": "emergency",
+"aliases": [
+"kuna moto"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "There is a fire!",
+"note": "'Moto' also means 'hot', so the full phrase matters.",
+"translations": {
+"ar": "هناك حريق!",
+"fr": "Au feu ! Il y a un incendie !",
+"ja": "火事です！",
+"es": "¡Hay un incendio!",
+"zh": "着火了！",
+"de": "Es brennt!"
+},
+"needs_review": false
+},
+{
+"id": "nimepotea",
+"category": "emergency",
+"aliases": [
+"nimepotea",
+"i am lost",
+"i'm lost"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I am lost",
+"note": "",
+"translations": {
+"ar": "لقد تهت",
+"fr": "Je suis perdu(e)",
+"ja": "道に迷いました",
+"es": "Estoy perdido/a",
+"zh": "我迷路了",
+"de": "Ich habe mich verirrt"
+},
+"needs_review": false
+},
+{
+"id": "nimeibiwa",
+"category": "emergency",
+"aliases": [
+"nimeibiwa",
+"i was robbed",
+"i have been robbed"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "I have been robbed",
+"note": "Report it at the nearest police station and keep the reference number.",
+"translations": {
+"ar": "لقد سُرقت",
+"fr": "On m'a volé",
+"ja": "盗まれました",
+"es": "Me han robado",
+"zh": "我被偷了",
+"de": "Mir wurde etwas gestohlen"
+},
+"needs_review": false
+},
+{
+"id": "chuo",
+"category": "campus",
+"aliases": [
+"chuo",
+"chuo kikuu"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "College / university ('chuo kikuu' = university)",
+"note": "Students casually say 'chuo' for their campus.",
+"translations": {
+"ar": "الجامعة",
+"fr": "L'université",
+"ja": "大学",
+"es": "La universidad",
+"zh": "大学",
+"de": "Die Universität"
+},
+"needs_review": false
+},
+{
+"id": "mtihani",
+"category": "campus",
+"aliases": [
+"mtihani",
+"mitihani"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Exam",
+"note": "A 'CAT' (continuous assessment test) is a common mid-semester test.",
+"translations": {
+"ar": "امتحان",
+"fr": "Examen",
+"ja": "試験",
+"es": "Examen",
+"zh": "考试",
+"de": "Prüfung"
+},
+"needs_review": false
+},
+{
+"id": "maktaba",
+"category": "campus",
+"aliases": [
+"maktaba"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Library",
+"note": "",
+"translations": {
+"ar": "مكتبة",
+"fr": "Bibliothèque",
+"ja": "図書館",
+"es": "Biblioteca",
+"zh": "图书馆",
+"de": "Bibliothek"
+},
+"needs_review": false
+},
+{
+"id": "mwalimu",
+"category": "campus",
+"aliases": [
+"mwalimu",
+"walimu"
+],
+"source_language": "Swahili",
+"register": "standard",
+"meaning": "Teacher / lecturer",
+"note": "Respectful form of address; 'walimu' is the plural.",
+"translations": {
+"ar": "معلم / محاضر",
+"fr": "Enseignant / professeur",
+"ja": "先生",
+"es": "Profesor/a",
+"zh": "老师",
+"de": "Lehrer/in / Dozent/in"
+},
+"needs_review": false
+},
+{
+"id": "supp",
+"category": "campus",
+"aliases": [
+"supp",
+"supps",
+"supplementary exam"
+],
+"source_language": "Kenyan English",
+"register": "slang",
+"meaning": "Supplementary exam (a resit after failing a unit)",
+"note": "Campus slang; the official term is 'supplementary exam'.",
+"translations": {
+"ar": "امتحان إعادة (تكميلي)",
+"fr": "Examen de rattrapage",
+"ja": "追試験",
+"es": "Examen de recuperación",
+"zh": "补考",
+"de": "Nachprüfung"
+},
+"needs_review": true,
+"review_note": "Systems differ by country; confirm the closest local term."
+},
+{
+"id": "attachment",
+"category": "campus",
+"aliases": [
+"attachment",
+"industrial attachment"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "Internship placement required by many degree courses",
+"note": "A Kenyan term for the practical work placement.",
+"translations": {
+"ar": "تدريب عملي ميداني",
+"fr": "Stage en entreprise",
+"ja": "インターンシップ（実習）",
+"es": "Prácticas profesionales",
+"zh": "实习",
+"de": "Praktikum"
+},
+"needs_review": false
+},
+{
+"id": "karo",
+"category": "campus",
+"aliases": [
+"karo",
+"school fees",
+"ada ya shule"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "School or tuition fees",
+"note": "'Karo' is slang; the standard Swahili word for a fee is 'ada'.",
+"translations": {
+"ar": "الرسوم الدراسية",
+"fr": "Frais de scolarité",
+"ja": "学費",
+"es": "Matrícula / cuotas escolares",
+"zh": "学费",
+"de": "Studiengebühren"
+},
+"needs_review": true,
+"review_note": "Slang term; confirm usage with a Kenyan speaker."
+},
+{
+"id": "hostel",
+"category": "campus",
+"aliases": [
+"hostel",
+"hostels"
+],
+"source_language": "Kenyan English",
+"register": "standard",
+"meaning": "Student accommodation",
+"note": "At Kenyan universities 'hostel' commonly means student housing, not a backpacker hostel.",
+"translations": {
+"ar": "سكن الطلاب",
+"fr": "Résidence étudiante",
+"ja": "学生寮",
+"es": "Residencia estudiantil",
+"zh": "学生宿舍",
+"de": "Studentenwohnheim"
+},
+"needs_review": false
+},
+{
+"id": "mambo",
+"category": "sheng",
+"aliases": [
+"mambo",
+"mambo vipi",
+"niaje",
+"sasa"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "What's up? (casual greeting)",
+"note": "Usual replies: 'poa' or 'safi'. 'Sasa' also means 'now' in standard Swahili; as a greeting it is casual and used among peers.",
+"translations": {
+"ar": "ما الأخبار؟ كيف الحال؟",
+"fr": "Quoi de neuf ? / Salut, ça va ?",
+"ja": "調子どう？／やあ、元気？",
+"es": "¿Qué onda? / ¿Qué tal?",
+"zh": "最近怎么样？",
+"de": "Was geht? / Wie läuft's?"
+},
+"needs_review": true,
+"review_note": "Slang greeting; check that each rendering sounds natural and casual."
+},
+{
+"id": "poa",
+"category": "sheng",
+"aliases": [
+"poa",
+"safi",
+"fiti"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "Cool / fine / great (also the reply to 'mambo?')",
+"note": "",
+"translations": {
+"ar": "تمام، رائع",
+"fr": "Cool, ça va bien",
+"ja": "いいね／元気だよ",
+"es": "Genial / todo bien",
+"zh": "不错／挺好的",
+"de": "Cool / alles gut"
+},
+"needs_review": true,
+"review_note": "Slang; confirm tone."
+},
+{
+"id": "mbogi",
+"category": "sheng",
+"aliases": [
+"mbogi",
+"mbogi genje"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "Crew / group of friends",
+"note": "Can also mean a crowd. Context decides.",
+"translations": {
+"ar": "شلّة أصدقاء",
+"fr": "La bande de potes",
+"ja": "仲間たち",
+"es": "La pandilla / el grupo de amigos",
+"zh": "一帮朋友",
+"de": "Die Clique"
+},
+"needs_review": true,
+"review_note": "Slang; confirm tone."
+},
+{
+"id": "msee",
+"category": "sheng",
+"aliases": [
+"msee",
+"wasee"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "Guy / dude / man",
+"note": "Used for any guy, like 'dude'. 'Wasee' is the plural.",
+"translations": {
+"ar": "يا رجل، يا صاحبي",
+"fr": "Mec / gars",
+"ja": "やつ／兄弟（くだけた呼び方）",
+"es": "Tío / amigo",
+"zh": "哥们／家伙",
+"de": "Typ / Alter"
+},
+"needs_review": true,
+"review_note": "Slang; confirm tone."
+},
+{
+"id": "manze",
+"category": "sheng",
+"aliases": [
+"manze",
+"maze",
+"manzee"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "Wow / hey man / seriously (interjection)",
+"note": "Common among young people; the tone (surprise, sympathy, emphasis) depends on context.",
+"translations": {
+"ar": "يا رجل! (تعبير عن الدهشة)",
+"fr": "Mec ! / Dis donc !",
+"ja": "うわあ、ねえ（驚き・呼びかけ）",
+"es": "¡Oye, tío! / ¡Vaya!",
+"zh": "哇／兄弟（感叹）",
+"de": "Mann! / Alter!"
+},
+"needs_review": true,
+"review_note": "Interjection with no exact equivalent; confirm tone."
+},
+{
+"id": "mulla",
+"category": "sheng",
+"aliases": [
+"mulla",
+"ganji",
+"doh",
+"chapaa"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "Money (slang)",
+"note": "Casual; avoid in formal settings. Which word is used varies by area.",
+"translations": {
+"ar": "فلوس",
+"fr": "Du fric",
+"ja": "お金（くだけた言い方）",
+"es": "Plata / lana",
+"zh": "钱（口语）",
+"de": "Kohle"
+},
+"needs_review": true,
+"review_note": "Slang; confirm tone."
+},
+{
+"id": "form_gani",
+"category": "sheng",
+"aliases": [
+"form gani",
+"form ni gani"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "What's the plan? / what's up?",
+"note": "'Form' in Sheng can mean a plan or idea.",
+"translations": {
+"ar": "ما الخطة؟ ماذا سنفعل؟",
+"fr": "C'est quoi le plan ?",
+"ja": "どうする？予定は？",
+"es": "¿Cuál es el plan?",
+"zh": "有什么计划？",
+"de": "Was ist der Plan?"
+},
+"needs_review": true,
+"review_note": "Slang; confirm meaning and tone."
+},
+{
+"id": "nduthi",
+"category": "sheng",
+"aliases": [
+"nduthi"
+],
+"source_language": "Sheng",
+"register": "slang",
+"meaning": "Motorbike (Sheng)",
+"note": "Used like 'boda' to mean a motorbike or motorbike taxi.",
+"translations": {
+"ar": "دراجة نارية (عامية)",
+"fr": "Moto (argot)",
+"ja": "バイク（スラング）",
+"es": "Moto (jerga)",
+"zh": "摩托车（俚语）",
+"de": "Motorrad (Slang)"
+},
+"needs_review": true,
+"review_note": "Slang; confirm usage."
+}
+]"""

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karibu Translator</title>
+<style>
+  :root {
+    --bg: #f6f3ee; --card: #ffffff; --ink: #1d2320; --muted: #5d6762; --line: #e1dcd2;
+    --accent: #1f6f50; --accent-ink: #ffffff; --warn: #8a5a00; --warn-bg: #fff3d6;
+    --good: #1f6f50; --bad: #a3321f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141815; --card: #1d231f; --ink: #ecefe9; --muted: #a2aba5; --line: #2f3832;
+      --accent: #5fc79b; --accent-ink: #0d1511; --warn: #f2c66d; --warn-bg: #3a2f12;
+      --good: #5fc79b; --bad: #ef8b78;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, "Segoe UI", "Noto Sans", sans-serif; }
+  /* The lang attribute set in the JS lets the browser pick the right font for each script. */
+  [lang="ar"]      { font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, "Geeza Pro", serif; font-size: 1.1em; }
+  [lang="ja"]      { font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+  [lang="zh-Hans"] { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  main { max-width: 800px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 1.6rem; margin: 8px 0 2px; }
+  .sub { color: var(--muted); margin: 0 0 16px; }
+  .banner { background: var(--warn-bg); color: var(--warn); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: .93rem; }
+  .bar { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: end; margin-bottom: 14px; }
+  .bar label { display: block; font-size: .8rem; color: var(--muted); margin-bottom: 3px; }
+  select, textarea, input[type=file] { width: 100%; font: inherit; color: var(--ink); background: var(--card);
+      border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  textarea { min-height: 130px; resize: vertical; }
+  button { font: inherit; cursor: pointer; }
+  .swap { padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: var(--ink); }
+  .swap[disabled] { opacity: .4; cursor: default; }
+  .primary { padding: 11px 20px; border: 0; border-radius: 12px; background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .primary[disabled] { opacity: .6; cursor: wait; }
+  .ghost { padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); text-decoration: none; display: inline-block; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  .tab { padding: 8px 18px; border: 1px solid var(--line); border-radius: 99px; background: var(--card); color: var(--ink); }
+  .tab[aria-selected=true] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .panel[hidden] { display: none; }
+  .row { display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+  .hint { color: var(--muted); font-size: .88rem; }
+  .chip { padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: .85rem; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin-top: 14px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .badge { font-size: .75rem; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+  .badge.warn { color: var(--warn); background: var(--warn-bg); border-color: transparent; }
+  .out { font-size: 1.12rem; white-space: pre-wrap; overflow-wrap: anywhere; margin: 6px 0 10px; }
+  .tips { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 10px; font-size: .92rem; color: var(--muted); }
+  .tips div { margin-top: 6px; }
+  .err { color: var(--bad); margin-top: 12px; }
+  progress { width: 100%; height: 14px; accent-color: var(--accent); }
+  .quiz .opts { display: grid; gap: 8px; margin-top: 10px; }
+  .opt { text-align: start; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); }
+  .opt.right { border-color: var(--good); color: var(--good); font-weight: 600; }
+  .opt.wrong { border-color: var(--bad); color: var(--bad); }
+  .opt[disabled] { cursor: default; }
+  details { margin-top: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
+  summary { cursor: pointer; font-weight: 600; }
+  .foot { color: var(--muted); font-size: .85rem; margin-top: 24px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 560px) { .bar { grid-template-columns: 1fr; } .swap { justify-self: start; } }
+</style>
+</head>
+<body>
+<main>
+  <div hidden dir="rtl" lang="ar" aria-hidden="true"></div>
+  <h1>Karibu Translator</h1>
+  <p class="sub">Translate words, sentences and files (PDF, TXT, MD) between English, Swahili, Sheng, Arabic, French, Japanese, Spanish, Chinese and German, in any direction.</p>
+
+  {% if not ai_on %}
+  <div class="banner" role="status">AI translation is off. Set the <code>ANTHROPIC_API_KEY</code> environment variable and restart the server to translate sentences and files. Until then only single words and phrases from the built-in glossary work.</div>
+  {% endif %}
+
+  <div class="bar">
+    <div><label for="from">From</label>
+      <select id="from"><option value="auto">Detect language</option>
+        {% for l in langs %}<option value="{{ l.code }}">{{ l.name }}{% if l.native != l.name %} · {{ l.native }}{% endif %}</option>{% endfor %}
+      </select></div>
+    <button class="swap" id="swap" type="button" title="Swap languages" aria-label="Swap languages">⇄</button>
+    <div><label for="to">To</label>
+      <select id="to">
+        {% for l in langs %}<option value="{{ l.code }}">{{ l.name }}{% if l.native != l.name %} · {{ l.native }}{% endif %}</option>{% endfor %}
+      </select></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tabText" aria-selected="true" aria-controls="panelText">Text</button>
+    <button class="tab" role="tab" id="tabFile" aria-selected="false" aria-controls="panelFile">File</button>
+  </div>
+
+  <section class="panel" id="panelText" role="tabpanel" aria-labelledby="tabText">
+    <label class="hint" for="src" style="display:block;margin-bottom:4px">Type a word, a sentence or a few paragraphs (Ctrl+Enter to translate)</label>
+    <textarea id="src" maxlength="20000" placeholder="e.g. Habari yako? Naomba msaada kupata choo."></textarea>
+    <div class="row">
+      <button class="primary" id="go" type="button">Translate</button>
+      <span class="hint">Try:</span>
+      <span id="examples" class="row" style="margin:0"></span>
+    </div>
+    <div id="textOut" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" id="panelFile" role="tabpanel" aria-labelledby="tabFile" hidden>
+    <label class="hint" for="file" style="display:block;margin-bottom:4px">Choose a PDF, TXT or MD file (up to {{ max_mb }} MB)</label>
+    <input type="file" id="file" accept=".pdf,.txt,.md,application/pdf,text/plain,text/markdown">
+    <div class="row">
+      <button class="primary" id="goFile" type="button">Translate file</button>
+      <span class="hint">Long files are translated in pieces, so it can take a few minutes.</span>
+    </div>
+    <div id="fileOut" aria-live="polite"></div>
+  </section>
+
+  <details class="quiz">
+    <summary>Practice with the glossary (quiz)</summary>
+    <p class="hint">Quiz yourself on the {{ count }} verified phrases. Uses the "To" language when it is one of the glossary languages (Arabic, French, Japanese, Spanish, Chinese, German), otherwise French.</p>
+    <button class="ghost" id="quizBtn" type="button">Quiz me</button>
+    <div id="quizBox" aria-live="polite"></div>
+  </details>
+
+  <p class="foot">AI translations can contain mistakes. Have anything important (legal, medical, immigration, academic) checked by a qualified translator. Sheng output especially should be checked by a Kenyan speaker.</p>
+</main>
+
+<script>
+const LANGS = {{ langs|tojson }};
+const byCode = Object.fromEntries(LANGS.map(l => [l.code, l]));
+const GLOSSARY_LANGS = ["ar", "fr", "ja", "es", "zh", "de"];
+const $ = (id) => document.getElementById(id);
+
+// Build DOM with textContent so typed or translated text can never become HTML.
+function el(tag, props = {}, ...kids) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(props)) {
+    if (k === "class") node.className = v; else if (k === "text") node.textContent = v; else node.setAttribute(k, v);
+  }
+  kids.forEach(k => node.append(k));
+  return node;
+}
+function badges(...items) {
+  return el("div", { class: "badges" }, ...items.filter(Boolean).map(([text, warn]) => el("span", { class: "badge" + (warn ? " warn" : ""), text })));
+}
+
+// ---- language bar ----------------------------------------------------------
+function save() { try { localStorage.setItem("pair", JSON.stringify([$("from").value, $("to").value])); } catch (e) {} }
+function restore() {
+  try {
+    const p = JSON.parse(localStorage.getItem("pair") || "null");
+    if (Array.isArray(p) && byCode[p[1]] && (p[0] === "auto" || byCode[p[0]])) { $("from").value = p[0]; $("to").value = p[1]; return; }
+  } catch (e) {}
+  $("to").value = "fr";
+}
+function syncSwap() { $("swap").disabled = $("from").value === "auto"; }
+$("swap").onclick = () => { const f = $("from").value; $("from").value = $("to").value; $("to").value = f; syncSwap(); save(); };
+$("from").onchange = () => { syncSwap(); save(); };
+$("to").onchange = save;
+
+// ---- tabs ------------------------------------------------------------------
+function showTab(name) {
+  for (const t of ["Text", "File"]) {
+    $("tab" + t).setAttribute("aria-selected", String(t === name));
+    $("panel" + t).hidden = t !== name;
+  }
+}
+$("tabText").onclick = () => showTab("Text");
+$("tabFile").onclick = () => showTab("File");
+
+// ---- text translation ------------------------------------------------------
+function copyButton(getText) {
+  const b = el("button", { class: "ghost", type: "button", text: "Copy" });
+  b.onclick = async () => { try { await navigator.clipboard.writeText(getText()); b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1200); } catch (e) {} };
+  return b;
+}
+
+function showResult(d) {
+  const card = el("article", { class: "card" });
+  card.append(badges([`${d.source_name} → ${d.target_name}`], d.engine === "glossary" ? ["glossary only", true] : ["Claude AI"]));
+  card.append(el("div", { class: "out", lang: d.target_lang, dir: d.target_dir, text: d.translation }));
+  d.notes.forEach(n => card.append(el("p", { class: "hint", text: n })));
+  card.append(copyButton(() => d.translation));
+  if (d.tips.length) {
+    const tips = el("div", { class: "tips" }, el("strong", { text: "From the glossary" }));
+    d.tips.forEach(t => {
+      const line = el("div", {}, el("strong", { text: t.term }), document.createTextNode(` (${t.source_language}): ${t.meaning}`));
+      if (t.note) line.append(document.createTextNode(` ${t.note}`));
+      if (t.needs_review) line.append(el("span", { class: "badge warn", text: "not yet checked", style: "margin-left:6px" }));
+      tips.append(line);
+    });
+    card.append(tips);
+  }
+  $("textOut").replaceChildren(card);
+}
+
+async function translateText() {
+  const text = $("src").value.trim();
+  if (!text) return;
+  $("go").disabled = true; $("go").textContent = "Translating…";
+  $("textOut").replaceChildren(el("p", { class: "hint", text: "Translating…" }));
+  try {
+    const res = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, source: $("from").value, target: $("to").value }) });
+    const d = await res.json();
+    if (res.ok) showResult(d); else $("textOut").replaceChildren(el("p", { class: "err", text: d.error || "Something went wrong." }));
+  } catch (e) {
+    $("textOut").replaceChildren(el("p", { class: "err", text: "Could not reach the server." }));
+  }
+  $("go").disabled = false; $("go").textContent = "Translate";
+}
+$("go").onclick = translateText;
+$("src").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) translateText(); });
+["Habari yako? Naomba msaada.", "Where is the library?", "Mambo vipi msee"].forEach(s => {
+  const b = el("button", { class: "chip", type: "button", text: s });
+  b.onclick = () => { $("src").value = s; translateText(); };
+  $("examples").append(b);
+});
+
+// ---- file translation ------------------------------------------------------
+let poller = null;
+function fileError(msg) { $("fileOut").replaceChildren(el("p", { class: "err", text: msg })); $("goFile").disabled = false; }
+
+async function translateFile() {
+  const file = $("file").files[0];
+  if (!file) { fileError("Please choose a file first."); return; }
+  const fd = new FormData();
+  fd.append("file", file); fd.append("source", $("from").value); fd.append("target", $("to").value);
+  $("goFile").disabled = true;
+  $("fileOut").replaceChildren(el("p", { class: "hint", text: "Uploading…" }));
+  let job;
+  try {
+    const res = await fetch("/api/files", { method: "POST", body: fd });
+    job = await res.json();
+    if (!res.ok) return fileError(job.error || "Upload failed.");
+  } catch (e) { return fileError("Could not reach the server."); }
+
+  const bar = el("progress", { max: String(job.chunks), value: "0" });
+  const label = el("p", { class: "hint", text: `Translating ${job.chunks} piece${job.chunks === 1 ? "" : "s"}…` });
+  $("fileOut").replaceChildren(label, bar);
+  clearInterval(poller);
+  poller = setInterval(async () => {
+    try {
+      const res = await fetch("/api/files/" + job.job_id);
+      const s = await res.json();
+      if (!res.ok) { clearInterval(poller); return fileError(s.error); }
+      bar.max = s.total; bar.value = s.done;
+      label.textContent = `Translating… ${s.done} of ${s.total}`;
+      if (s.status === "error") { clearInterval(poller); fileError(s.error); }
+      if (s.status === "done") { clearInterval(poller); showFileDone(job.job_id, s); }
+    } catch (e) { clearInterval(poller); fileError("Lost contact with the server."); }
+  }, 1500);
+}
+
+function showFileDone(id, s) {
+  const card = el("article", { class: "card" });
+  card.append(badges([`${s.source_name} → ${s.target_name}`], ["Claude AI"]));
+  const links = el("div", { class: "row", style: "margin:0 0 10px" },
+    el("a", { class: "ghost", href: `/api/files/${id}/download?format=txt`, text: "Download .txt" }),
+    el("a", { class: "ghost", href: `/api/files/${id}/download?format=html`, text: "Download .html (print to PDF)" }));
+  card.append(links);
+  s.notes.forEach(n => card.append(el("p", { class: "hint", text: n })));
+  card.append(el("div", { class: "out", lang: s.target_lang, dir: s.target_dir, text: s.preview + (s.truncated ? "\n…" : "") }));
+  if (s.truncated) card.append(el("p", { class: "hint", text: "Preview of the first part. Download the file for everything." }));
+  $("fileOut").replaceChildren(card);
+  $("goFile").disabled = false;
+}
+$("goFile").onclick = translateFile;
+
+// ---- quiz ------------------------------------------------------------------
+async function newQuestion() {
+  const code = GLOSSARY_LANGS.includes($("to").value) ? $("to").value : "fr";
+  const box = $("quizBox");
+  box.replaceChildren();
+  try {
+    const res = await fetch("/api/quiz?lang=" + code);
+    const q = await res.json();
+    if (!res.ok) { box.append(el("p", { class: "hint", text: q.error })); return; }
+    box.append(el("p", { text: `What is "${q.term}" in ${q.language}?` }));
+    const opts = el("div", { class: "opts" });
+    const buttons = q.options.map((text, i) => {
+      const b = el("button", { class: "opt", type: "button", lang: q.html_lang, dir: q.dir, text });
+      b.onclick = () => {
+        buttons.forEach((x, j) => { x.disabled = true; if (j === q.answer_index) x.classList.add("right"); });
+        if (i !== q.answer_index) b.classList.add("wrong");
+        const next = el("button", { class: "ghost", type: "button", text: "Next question" });
+        next.onclick = newQuestion;
+        box.append(el("p", { class: "hint", text: `${i === q.answer_index ? "Correct!" : "Not quite."} "${q.term}" means: ${q.meaning}` }), next);
+      };
+      return b;
+    });
+    buttons.forEach(b => opts.append(b));
+    box.append(opts);
+  } catch (e) { box.append(el("p", { class: "hint", text: "Could not load a question." })); }
+}
+$("quizBtn").onclick = newQuestion;
+
+restore(); syncSwap();
+</script>
+</body>
+</html>

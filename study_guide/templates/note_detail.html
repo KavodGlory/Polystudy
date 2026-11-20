@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ note.title }}{% endblock %}
+{% block breadcrumb %}My notes / {{ note.title }}{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">SAVED STUDY NOTE · {{ note.language }}</p><h1>{{ note.title }}</h1><p class="lead">Translate this note into your preferred study language.</p></div><a class="button secondary" href="{{ url_for('notes_page') }}">← All notes</a></div>
+<div class="tool-layout">
+  <section class="card"><div class="card-heading"><div><h2>Original note</h2></div></div><div class="output-box ready" id="note-original">{{ note.content }}</div></section>
+  <section class="card">
+    <div class="card-heading"><div><h2>Translation</h2><p>Choose the language you want to study in.</p></div></div>
+    <div class="field" style="margin-bottom:13px"><label for="note-target">Translate to</label><select id="note-target">{% for language in languages %}<option value="{{ language.code }}">{{ language.name }}</option>{% endfor %}</select></div>
+    <button class="button" id="translate-note" type="button">Translate note</button>
+    <div class="output-box" id="note-translation" aria-live="polite" style="margin-top:14px">Translation will appear here.</div>
+  </section>
+</div>
+{% endblock %}

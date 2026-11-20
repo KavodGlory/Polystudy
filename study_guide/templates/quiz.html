@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Quiz practice{% endblock %}
+{% block breadcrumb %}Quiz practice{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">SMALL STEPS, STRONGER RECALL</p><h1>Build a quiz session</h1><p class="lead">Choose a subject and length. Polystudy creates a fresh session with several questions and tracks your score.</p></div><span class="demo-tag">English · Kiswahili</span></div>
+<div class="tool-layout">
+  <section class="card">
+    <form id="quiz-setup" class="form-grid">
+      <div class="field"><label for="quiz-subject">Subject</label><select id="quiz-subject"><option value="all">All subjects</option>{% for subject in subjects %}<option value="{{ subject }}">{{ subject }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="quiz-language">Language</label><select id="quiz-language"><option value="en">English</option><option value="sw">Kiswahili</option></select></div>
+      <div class="field"><label for="quiz-count">Questions</label><select id="quiz-count"></select></div>
+      <div class="field" style="align-self:end"><button class="button" id="quiz-start" type="submit" disabled>Generate quiz →</button></div>
+    </form>
+    <p class="result-meta" id="quiz-status" role="status">Choose a subject and generate a quiz.</p>
+    <div class="quiz-stage" id="quiz-stage" aria-live="polite"><div class="output-box">Your quiz will appear here.</div></div>
+    <div style="display:flex;gap:10px;margin-top:16px;align-items:center"><button class="button secondary" id="next-question" type="button" hidden>Next question →</button><span class="result-meta" id="quiz-score"></span></div>
+  </section>
+  <aside class="card"><p class="eyebrow">JOTFORM QUIZ</p><h2 id="jotform-title">Linked Jotform</h2><p class="lead" id="jotform-status">Checking the connected Jotform form…</p><ul id="jotform-questions"></ul>
+    {% if jotform_form_url %}<a class="button secondary" href="{{ jotform_form_url }}" target="_blank" rel="noopener noreferrer">Open Jotform quiz ↗</a>{% else %}<p class="result-meta">Set a valid JOTFORM_QUIZ_FORM_ID to enable the quiz link.</p>{% endif %}
+    <div class="notice" style="margin-top:18px">Jotform's API provides access to an existing form. Configure JOTFORM_API_KEY on the server to inspect it. Polystudy quiz sessions are generated from the local question bank.</div>
+  </aside>
+</div>
+{% endblock %}

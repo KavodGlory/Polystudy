@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}My notes{% endblock %}
+{% block breadcrumb %}My notes{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>My study notes</h1><p class="lead">Save your own notes here, then open one to translate it into another language.</p></div><a class="button" href="{{ url_for('translator_page') }}">Translate materials →</a></div>
+<div class="tool-layout">
+  <section class="card">
+    <div class="card-heading"><div><h2>Save a note</h2><p>Notes are stored in the local demo database.</p></div></div>
+    <form method="post" class="form-grid">
+      <div class="field full"><label for="note-title">Title</label><input id="note-title" name="title" maxlength="160" required placeholder="e.g. Week 2 — Cell biology"></div>
+      <div class="field"><label for="note-language">Note language</label><select id="note-language" name="language">{% for language in languages %}<option value="{{ language.code }}">{{ language.name }}</option>{% endfor %}</select></div>
+      <div class="field full"><label for="note-content">Content</label><textarea id="note-content" name="content" required placeholder="Write or paste your notes…"></textarea></div>
+      <div class="field full"><button class="button" type="submit">Save note</button></div>
+    </form>
+  </section>
+  <section class="card">
+    <div class="card-heading"><div><h2>Saved notes</h2><p>{{ notes|length }} note{% if notes|length != 1 %}s{% endif %} in this browser workspace</p></div></div>
+    {% if notes %}
+    <div class="resource-list" style="grid-template-columns:1fr">
+      {% for note in notes %}
+      <a class="resource-card" href="{{ url_for('note_detail', nid=note[0]) }}"><div class="category">{{ note[2] }}</div><h3>{{ note[1] }}</h3><p>Open note and translate →</p></a>
+      {% endfor %}
+    </div>
+    {% else %}<div class="output-box">Your saved notes will appear here.</div>{% endif %}
+  </section>
+</div>
+{% endblock %}

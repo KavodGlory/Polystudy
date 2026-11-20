@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <title>{% block title %}POLYSTUDY{% endblock %} · POLYSTUDY</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('index') }}">
+      <span class="brand-mark">P</span>
+      <span class="brand-name">POLYSTUDY<small>STUDENT COMPANION</small></span>
+    </a>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="nav-link {% if current_endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}"><span class="nav-icon">⌂</span>Overview</a>
+      <a class="nav-link {% if current_endpoint == 'translator_page' %}active{% endif %}" href="{{ url_for('translator_page') }}"><span class="nav-icon">文</span>Translator</a>
+      <a class="nav-link {% if current_endpoint in ('notes_page', 'note_detail') %}active{% endif %}" href="{{ url_for('notes_page') }}"><span class="nav-icon">▤</span>My notes</a>
+      <a class="nav-link {% if current_endpoint == 'quiz_page' %}active{% endif %}" href="{{ url_for('quiz_page') }}"><span class="nav-icon">✳</span>Quiz practice</a>
+      <a class="nav-link {% if current_endpoint == 'help_desk' %}active{% endif %}" href="{{ url_for('help_desk') }}"><span class="nav-icon">？</span>Student help desk</a>
+      <a class="nav-link {% if current_endpoint == 'resources_page' %}active{% endif %}" href="{{ url_for('resources_page') }}"><span class="nav-icon">◇</span>Study resources</a>
+    </nav>
+    <div class="sidebar-note"><strong>Official public links</strong>Campus guidance links to published USIU-Africa pages. Confirm current details with the university.</div>
+  </aside>
+  <div class="main-area">
+    <header class="topbar">
+      <div class="breadcrumb">Student workspace <span aria-hidden="true">/</span> {% block breadcrumb %}Overview{% endblock %}</div>
+      <div class="profile"><span class="avatar">PS</span><span>Student</span></div>
+    </header>
+    <main class="content page-enter">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}" role="status">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>

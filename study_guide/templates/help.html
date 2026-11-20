@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Student help desk{% endblock %}
+{% block breadcrumb %}Student help desk{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">CAMPUS, MADE CLEARER</p><h1>Student help desk</h1><p class="lead">Browse published {{ institution }} information on admissions, fees, housing, student life, and support.</p></div><span class="demo-tag">{{ institution }} · public pages</span></div>
+<div class="notice">This directory links to official public pages. It is not connected to private student records or university systems. Follow each source link for current requirements, dates, and charges.</div>
+<section class="card" style="margin-bottom:18px">
+  <div class="card-heading"><div><h2>Choose your language</h2><p>English and Kiswahili are available offline; other languages use the translation service.</p></div></div>
+  <div class="field" style="max-width:350px"><label for="help-language">Help desk language</label><select id="help-language">{% for language in languages %}<option value="{{ language.code }}">{{ language.name }}{% if language.native != language.name %} · {{ language.native }}{% endif %}</option>{% endfor %}</select></div>
+</section>
+<div class="faq-list" id="help-results" aria-live="polite">
+  {% for item in resources %}
+  <article class="faq-item">
+    <div class="faq-top"><span class="faq-icon">{{ item.icon }}</span><div><div class="category">{{ item.category }}</div><h3>{{ item.title }}</h3><p>{{ item.summary }}</p><a class="link-button" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">Open official source →</a></div></div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

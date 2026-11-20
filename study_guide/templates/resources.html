@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Study resources{% endblock %}
+{% block breadcrumb %}Study resources{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">OPEN KNOWLEDGE FOR YOUR RESEARCH</p><h1>Research library</h1><p class="lead">Search OpenAlex for scholarly works marked open access. Polystudy shows bibliographic details and links to the publisher or repository; availability and reuse terms vary by work.</p></div><span class="demo-tag">OpenAlex · Open Access</span></div>
+<section class="card">
+  <form id="library-search" class="lang-row">
+    <div class="field"><label for="library-query">Topic, title, or keywords</label><input id="library-query" type="search" minlength="2" maxlength="200" placeholder="e.g. renewable energy in Kenya" required></div>
+    <button class="button" id="library-submit" type="submit">Search research ↗</button>
+  </form>
+  <p class="result-meta" id="library-status" role="status">Search returns open-access records from OpenAlex.</p>
+  <div class="resource-list" id="library-results" aria-live="polite"></div>
+</section>
+<div class="resource-list" style="margin-top:18px">
+  <article class="resource-card"><div class="resource-symbol">⌕</div><div class="category">Journal directory</div><h3>Directory of Open Access Journals</h3><p>Browse peer-reviewed open-access journals and articles directly in DOAJ.</p><a class="link-button" href="https://doaj.org/" target="_blank" rel="noopener noreferrer">Visit DOAJ →</a></article>
+  <article class="resource-card"><div class="resource-symbol">◎</div><div class="category">Regional research</div><h3>African Journals Online</h3><p>Discover African-published scholarly journals. Full-text availability depends on each journal.</p><a class="link-button" href="https://www.ajol.info/" target="_blank" rel="noopener noreferrer">Visit AJOL →</a></article>
+</div>
+<div class="notice" style="margin-top:18px">OpenAlex is a research index, not a university library login. Always check the publisher or repository page for the full text, license, and citation details.</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Overview{% endblock %}
+{% block breadcrumb %}Overview{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">YOUR STUDENT STUDY GUIDE</p>
+    <h1>Make every lesson<br>feel closer.</h1>
+    <p>Translate your study materials, practice in two languages, and find your way around campus — all in one place.</p>
+    <a class="button light" href="{{ url_for('translator_page') }}">Open translator <span aria-hidden="true">→</span></a>
+    <div class="stat-grid">
+      <div class="stat"><strong>{{ notes|length }}</strong><span>saved study notes</span></div>
+      <div class="stat"><strong>{{ quizzes|length }}</strong><span>practice topics</span></div>
+      <div class="stat"><strong>9</strong><span>translation languages</span></div>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true"><div class="hero-orb">文</div></div>
+</section>
+
+<div class="dashboard-grid">
+  <section>
+    <div class="card-heading" style="margin-top:5px">
+      <div><h2>Your study toolkit</h2><p>Pick up where you need a hand.</p></div>
+    </div>
+    <div class="quick-grid">
+      <a class="quick-card" href="{{ url_for('translator_page') }}"><span class="quick-icon">文</span><strong>Translate materials</strong><span>Notes, text and documents</span></a>
+      <a class="quick-card" href="{{ url_for('quiz_page') }}"><span class="quick-icon">✳</span><strong>Practice a quiz</strong><span>Try a question in English or Kiswahili</span></a>
+      <a class="quick-card" href="{{ url_for('notes_page') }}"><span class="quick-icon">▤</span><strong>Keep study notes</strong><span>Save ideas in your workspace</span></a>
+      <a class="quick-card" href="{{ url_for('help_desk') }}"><span class="quick-icon">？</span><strong>Ask the help desk</strong><span>Housing, fees and deadlines</span></a>
+    </div>
+  </section>
+  <section class="card">
+    <div class="card-heading"><div><h2>USIU-Africa information</h2><p>Official public university pages</p></div><a class="link-button" href="{{ url_for('help_desk') }}">Browse help desk →</a></div>
+    <div class="deadline-list">
+      {% for item in resources[:4] %}
+      <div class="deadline"><div class="date-pill" aria-hidden="true">{{ item.icon }}</div><div><strong>{{ item.title }}</strong><small>{{ item.category }} · Verify current details on the official page.</small></div></div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+<div class="notice" style="margin-top:20px">Polystudy links to public USIU-Africa information. It is not connected to private student records, admissions, billing, or university systems.</div>
+{% endblock %}
