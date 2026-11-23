@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import pytest
 
 from study_guide.app import app
-from study_guide.integrations import JotformClient, IntegrationError
+from study_guide.integrations import JotformClient, IntegrationError, SupabaseClient
 
 
 @pytest.fixture
@@ -11,6 +11,26 @@ def client():
     app.config.update(TESTING=True)
     return app.test_client()
 
+
+def test_health_route_and_html_cache_headers(client):
+    health = client.get("/health")
+    assert health.status_code == 200
+    assert health.get_json()["status"] == "ok"
+    home = client.get("/")
+    assert home.status_code == 200
+    assert "no-store" in home.headers["Cache-Control"]
+
+
+def test_favicon_route_redirects_to_svg(client):
+    response = client.get("/favicon.ico")
+    assert response.status_code == 302
+    assert response.headers["Location"].endswith("/static/favicon.svg")
+
+
+def test_unknown_api_route_returns_json(client):
+    response = client.get("/api/does-not-exist")
+    assert response.status_code == 404
+    assert response.get_json()["error"]
 
 def test_student_pages_render(client):
     for path in ("/", "/translator", "/notes", "/quiz", "/help", "/resources"):
@@ -29,11 +49,12 @@ def test_quiz_endpoint_returns_localized_bilingual_questions(client):
     assert client.get("/api/quizzes?language=fr").status_code == 400
 
 
-def test_help_desk_uses_cited_usiu_public_pages(client):
+def test_help_desk_uses_supabase_glossary(client):
     payload = client.get("/api/university-info?language=sw").get_json()
-    categories = {item["category"] for item in payload["items"]}
-    assert {"Housing", "Fees", "Admissions", "Health"} <= categories
-    assert payload["items"][0]["title"] and payload["items"][0]["source_url"].startswith("https://www.usiu.ac.ke/")
+    assert payload["source"] == "Supabase"
+    assert payload["items"]
+    assert all(item["institution"] == "Supabase" for item in payload["items"])
+    assert all(item["title"] and item["body"] for item in payload["items"])
 
 
 def test_quiz_generator_creates_nonrepeating_multi_question_sessions(client):
@@ -121,6 +142,58 @@ def test_jotform_invalid_form_id_is_not_reported_as_missing_key(monkeypatch):
     client = JotformClient(api_key="test-key", form_id="not-numeric")
     assert client.configured is False
     assert "JOTFORM_QUIZ_FORM_ID" in client.configuration_error
+
+
+def test_supabase_glossary_reads_exact_columns(monkeypatch):
+    import json
+    import study_guide.integrations as integrations
+
+    calls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self):
+            return json.dumps([
+                {"id": 1, "term_en": "house", "term_translated": "maison", "language": "French"}
+            ]).encode()
+
+    def fake_urlopen(request, timeout):
+        calls.append(request)
+        return Response()
+
+    monkeypatch.setattr(integrations.urllib.request, "urlopen", fake_urlopen)
+    client = SupabaseClient(
+        url="https://example.supabase.co",
+        api_key="test-publishable-key",
+    )
+    entries = client.list_glossary(language="French")
+    assert entries[0]["term_translated"] == "maison"
+    assert "language=eq.French" in calls[0].full_url
+    assert calls[0].get_header("Apikey") == "test-publishable-key"
+    assert calls[0].get_header("Authorization") == "Bearer test-publishable-key"
+
+
+def test_supabase_quiz_result_validates_score(monkeypatch):
+    client = SupabaseClient(
+        url="https://example.supabase.co",
+        api_key="test-publishable-key",
+    )
+    with pytest.raises(ValueError, match="0 and 100"):
+        client.save_quiz_result(-1)
+    with pytest.raises(ValueError, match="0 and 100"):
+        client.save_quiz_result(True)
+
+
+def test_supabase_client_has_project_defaults(monkeypatch):
+    monkeypatch.delenv("SUPABASE_ANON_KEY", raising=False)
+    monkeypatch.delenv("SUPABASE_PUBLISHABLE_KEY", raising=False)
+    monkeypatch.delenv("SUPABASE_KEY", raising=False)
+    assert SupabaseClient().configured is True
 
 
 def test_jotform_rejects_non_object_api_response(monkeypatch):

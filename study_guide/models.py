@@ -81,27 +81,6 @@ def create_quiz(question, answer, lang_q, lang_a):
         con.commit()
         return cur.lastrowid
 
-# ---------- Demo university information ----------
-def list_university_faq():
-    with sqlite3.connect(DB_PATH) as con:
-        con.row_factory = sqlite3.Row
-        return [dict(row) for row in con.execute(
-            "SELECT id, category, title_en, body_en, title_sw, body_sw, icon "
-            "FROM university_faq ORDER BY id"
-        )]
-
-
-def list_institution_resources(institution="USIU-Africa"):
-    with sqlite3.connect(DB_PATH) as con:
-        con.row_factory = sqlite3.Row
-        rows = con.execute(
-            "SELECT id, institution, category, title, summary, title_sw, summary_sw, url, icon "
-            "FROM institution_resources WHERE institution = ? ORDER BY category, id",
-            (institution,),
-        ).fetchall()
-    return [dict(row) for row in rows]
-
-
 def list_quiz_subjects():
     with sqlite3.connect(DB_PATH) as con:
         return [row[0] for row in con.execute(

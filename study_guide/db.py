@@ -1,11 +1,11 @@
-"""SQLite setup and seed data for quizzes and public institutional links."""
+"""SQLite setup and seed data for local POLYSTUDY features."""
 import sqlite3
 from pathlib import Path
 
 DB_PATH = Path(__file__).with_name('study_guide.db')
 
 def init_db():
-    """Create application tables and seed quiz questions and official public links."""
+    """Create application tables and seed the local quiz bank."""
     with sqlite3.connect(DB_PATH) as con:
         cur = con.cursor()
         cur.executescript('''
@@ -29,15 +29,6 @@ def init_db():
             lang_q TEXT NOT NULL,
             lang_a TEXT NOT NULL
         );
-        CREATE TABLE IF NOT EXISTS university_faq (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            category TEXT NOT NULL,
-            title_en TEXT NOT NULL,
-            body_en TEXT NOT NULL,
-            title_sw TEXT NOT NULL,
-            body_sw TEXT NOT NULL,
-            icon TEXT NOT NULL
-        );
         CREATE TABLE IF NOT EXISTS study_quizzes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             subject TEXT NOT NULL,
@@ -49,17 +40,6 @@ def init_db():
             explanation_en TEXT NOT NULL,
             explanation_sw TEXT NOT NULL
         );
-        CREATE TABLE IF NOT EXISTS institution_resources (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            institution TEXT NOT NULL,
-            category TEXT NOT NULL,
-            title TEXT NOT NULL,
-            summary TEXT NOT NULL,
-            title_sw TEXT NOT NULL,
-            summary_sw TEXT NOT NULL,
-            url TEXT NOT NULL UNIQUE,
-            icon TEXT NOT NULL
-        );
         CREATE TABLE IF NOT EXISTS research_cache (
             query TEXT NOT NULL,
             result_limit INTEGER NOT NULL,
@@ -68,63 +48,9 @@ def init_db():
             PRIMARY KEY (query, result_limit)
         );
         ''')
-        cur.executemany(
-            "INSERT OR IGNORE INTO institution_resources "
-            "(institution, category, title, summary, title_sw, summary_sw, url, icon) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-                ("USIU-Africa", "Admissions", "How to apply",
-                 "Review program details and admission requirements, then use the application form for your selected program. Check USIU-Africa's official page for current instructions.",
-                 "Jinsi ya kutuma ombi",
-                 "Kagua maelezo ya programu na masharti ya udahili, kisha tumia fomu ya programu uliyochagua. Angalia ukurasa rasmi wa USIU-Africa kwa maelekezo ya sasa.",
-                 "https://www.usiu.ac.ke/how-to-apply/", "↗"),
-                ("USIU-Africa", "Admissions", "Admission requirements",
-                 "USIU-Africa publishes general and program-specific admission requirements. Confirm current requirements directly with the university.",
-                 "Masharti ya udahili",
-                 "USIU-Africa huchapisha masharti ya jumla na ya kila programu. Thibitisha masharti ya sasa moja kwa moja na chuo kikuu.",
-                 "https://www.usiu.ac.ke/admission-requirements/", "✓"),
-                ("USIU-Africa", "Fees", "Tuition and fees",
-                 "The official page publishes the current fee schedule. Costs depend on program and student category; verify the latest figures before making payment.",
-                 "Ada ya masomo na gharama",
-                 "Ukurasa rasmi huchapisha ratiba ya sasa ya ada. Gharama hutegemea programu na kundi la mwanafunzi; thibitisha viwango vya karibuni kabla ya kulipa.",
-                 "https://www.usiu.ac.ke/tuition-fees/", "▤"),
-                ("USIU-Africa", "Housing", "Room and board application",
-                 "Use the university's official housing application information and contact USIU-Africa for current availability and dates.",
-                 "Ombi la malazi na chakula",
-                 "Tumia maelezo rasmi ya chuo kuhusu maombi ya malazi na uwasiliane na USIU-Africa kuhusu nafasi na tarehe za sasa.",
-                 "https://www.usiu.ac.ke/documents/room-and-board-housing-application-form/", "⌂"),
-                ("USIU-Africa", "Student life", "Student life and campus activities",
-                 "Official information about student clubs, sports, events, and campus activities.",
-                 "Maisha ya wanafunzi na shughuli za chuoni",
-                 "Maelezo rasmi kuhusu vilabu vya wanafunzi, michezo, matukio na shughuli za chuoni.",
-                 "https://www.usiu.ac.ke/student-life/", "✳"),
-                ("USIU-Africa", "Health", "Health and wellness",
-                 "Find the university's published information about health services, counseling, and wellness support.",
-                 "Afya na ustawi",
-                 "Pata maelezo yaliyochapishwa na chuo kuhusu huduma za afya, ushauri nasaha na msaada wa ustawi.",
-                 "https://www.usiu.ac.ke/health-wellness/", "＋"),
-                ("USIU-Africa", "Accessibility", "Disability inclusion",
-                 "The Disability Inclusion page explains the university's accessibility support and services.",
-                 "Ujumuishaji wa watu wenye ulemavu",
-                 "Ukurasa wa ujumuishaji wa watu wenye ulemavu unaeleza msaada na huduma za ufikivu za chuo.",
-                 "https://www.usiu.ac.ke/disability-inclusion/", "◇"),
-                ("USIU-Africa", "Academics", "Programs and schools",
-                 "Browse official undergraduate, master's, and doctoral program information.",
-                 "Programu na shule",
-                 "Vinjari maelezo rasmi kuhusu programu za shahada ya kwanza, uzamili na uzamivu.",
-                 "https://www.usiu.ac.ke/academics/our-programs/", "文"),
-                ("USIU-Africa", "Events", "Upcoming events",
-                 "Check the university's events page for current campus announcements; event listings can change.",
-                 "Matukio yajayo",
-                 "Angalia ukurasa wa matukio wa chuo kwa matangazo ya sasa; orodha ya matukio inaweza kubadilika.",
-                 "https://www.usiu.ac.ke/upcoming-events/", "◷"),
-                ("USIU-Africa", "General", "Official university FAQ",
-                 "Browse USIU-Africa's published answers to general questions about programs and student support.",
-                 "Maswali yanayoulizwa mara kwa mara",
-                 "Vinjari majibu yaliyochapishwa na USIU-Africa kuhusu programu na msaada kwa wanafunzi.",
-                 "https://www.usiu.ac.ke/about-us/faq/", "？"),
-            ],
-        )
+        # Remove tables left behind by the former local USIU database migration.
+        cur.execute("DROP TABLE IF EXISTS institution_resources")
+        cur.execute("DROP TABLE IF EXISTS university_faq")
         if cur.execute("SELECT COUNT(*) FROM study_quizzes").fetchone()[0] == 0:
             import json
             cur.executemany(

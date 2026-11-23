@@ -12,6 +12,7 @@ from . import db, models
 from .integrations import (
     IntegrationError,
     JotformClient,
+    SupabaseClient,
     search_open_access_works,
 )
 from .utils import get_service
@@ -25,9 +26,25 @@ app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
 db.init_db()
 
 
+@app.after_request
+def prevent_browser_stale_html(response):
+    if request.path == "/" or request.path.endswith(".html") or request.accept_mimetypes.accept_html:
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
+
 @app.errorhandler(413)
 def file_too_large(_error):
     return jsonify(error="File is too large. The upload limit is 10 MB."), 413
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    if request.path.startswith("/api/"):
+        return jsonify(error="API route not found."), 404
+    return render_template("base.html"), 404
 
 
 @app.context_processor
@@ -35,13 +52,28 @@ def shared_template_data():
     return {"current_endpoint": request.endpoint}
 
 
+@app.get("/favicon.ico")
+def favicon():
+    return redirect(url_for("static", filename="favicon.svg"), code=302)
+
+
+@app.get("/health")
+def health():
+    return jsonify(status="ok", application="POLYSTUDY")
+
+
 @app.route("/")
 def index():
+    supabase_entries = []
+    try:
+        supabase_entries = SupabaseClient().list_glossary(limit=6)
+    except (IntegrationError, ValueError):
+        supabase_entries = []
     return render_template(
         "index.html",
         notes=models.list_notes(),
         quizzes=models.list_study_quizzes(),
-        resources=models.list_institution_resources(),
+        supabase_entries=supabase_entries,
     )
 
 
@@ -93,18 +125,62 @@ def quiz_page():
 
 @app.route("/help")
 def help_desk():
+    supabase_entries = []
+    try:
+        supabase_entries = SupabaseClient().list_glossary(limit=100)
+    except (IntegrationError, ValueError):
+        pass
     return render_template(
         "help.html",
         languages=language_list(),
         ai_on=get_service().ai_available,
-        resources=models.list_institution_resources(),
-        institution="USIU-Africa",
+        resources=supabase_entries,
+        institution="Supabase glossary",
     )
 
 
 @app.route("/resources")
 def resources_page():
     return render_template("resources.html")
+
+
+@app.get("/api/supabase/glossary")
+def api_supabase_glossary():
+    language = request.args.get("language", "").strip() or None
+    try:
+        limit = int(request.args.get("limit", "100"))
+    except (TypeError, ValueError):
+        return jsonify(error="The glossary limit must be a whole number."), 400
+    client = SupabaseClient()
+    if not client.configured:
+        return jsonify(
+            connected=False,
+            error=client.configuration_error,
+            entries=[],
+        ), 200
+    try:
+        entries = client.list_glossary(language=language, limit=limit)
+        return jsonify(connected=True, source="Supabase", entries=entries)
+    except ValueError as exc:
+        return jsonify(error=str(exc)), 400
+    except IntegrationError as exc:
+        return jsonify(error=str(exc), connected=False, entries=[]), 502
+
+
+@app.post("/api/supabase/quiz-result")
+def api_supabase_quiz_result():
+    payload = request.get_json(silent=True) or {}
+    score = payload.get("score")
+    client = SupabaseClient()
+    if not client.configured:
+        return jsonify(error=client.configuration_error), 503
+    try:
+        saved = client.save_quiz_result(score)
+        return jsonify(saved=True, source="Supabase", result=saved)
+    except ValueError as exc:
+        return jsonify(error=str(exc)), 400
+    except IntegrationError as exc:
+        return jsonify(error=str(exc)), 502
 
 
 @app.post("/api/translate")
@@ -251,40 +327,25 @@ def api_university_info():
     language = request.args.get("language", "en")
     if language not in LANGUAGES:
         return jsonify(error="Choose a supported language."), 400
-    entries = models.list_institution_resources()
-    if language == "en":
-        return jsonify(language=language, translated=False, items=[
-            {"category": row["category"], "title": row["title"], "body": row["summary"],
-             "icon": row["icon"], "source_url": row["url"], "institution": row["institution"]}
-            for row in entries
-        ])
-    if language == "sw":
-        return jsonify(language=language, translated=False, items=[
-            {"category": row["category"], "title": row["title_sw"], "body": row["summary_sw"],
-             "icon": row["icon"], "source_url": row["url"], "institution": row["institution"]}
-            for row in entries
-        ])
-
-    svc = get_service()
-    if not svc.ai_available:
-        return jsonify(error="This language needs AI translation. Set GEMINI_API_KEY or ANTHROPIC_API_KEY in the server environment, or choose English."), 503
-    translated_items = []
     try:
-        for row in entries:
-            title = svc.translate_text(row["title"], language, "en").text
-            body = svc.translate_text(row["summary"], language, "en").text
-            translated_items.append({
-                "category": row["category"],
-                "title": title,
-                "body": body,
-                "icon": row["icon"],
-                "source_url": row["url"],
-                "institution": row["institution"],
-            })
-    except (ValueError, NoEngineError, TranslationError) as exc:
+        entries = SupabaseClient().list_glossary(limit=100)
+    except ValueError as exc:
+        return jsonify(error=str(exc)), 400
+    except IntegrationError as exc:
         return jsonify(error=str(exc)), 502
-    return jsonify(language=language, translated=True, items=translated_items)
+    items = [
+        {
+            "category": row["language"] or "Glossary",
+            "title": row["term_en"],
+            "body": row["term_translated"],
+            "icon": "文",
+            "source_url": "",
+            "institution": "Supabase",
+        }
+        for row in entries
+    ]
+    return jsonify(language=language, translated=False, source="Supabase", items=items)
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host="127.0.0.1", port=5000)
+    app.run(debug=False, host="0.0.0.0", port=5000, threaded=True)

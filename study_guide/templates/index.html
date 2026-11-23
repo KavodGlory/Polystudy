@@ -3,40 +3,63 @@
 {% block breadcrumb %}Overview{% endblock %}
 {% block content %}
 <section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">YOUR STUDENT STUDY GUIDE</p>
-    <h1>Make every lesson<br>feel closer.</h1>
-    <p>Translate your study materials, practice in two languages, and find your way around campus — all in one place.</p>
-    <a class="button light" href="{{ url_for('translator_page') }}">Open translator <span aria-hidden="true">→</span></a>
-    <div class="stat-grid">
-      <div class="stat"><strong>{{ notes|length }}</strong><span>saved study notes</span></div>
-      <div class="stat"><strong>{{ quizzes|length }}</strong><span>practice topics</span></div>
-      <div class="stat"><strong>9</strong><span>translation languages</span></div>
+  <div>
+    <span class="eyebrow">A study companion</span>
+    <h1>Study without <em>language barriers.</em></h1>
+    <p class="lead">Translate course materials, save study notes, practise with quizzes, and explore open-access research in one place.</p>
+    <div class="actions">
+      <a class="btn primary" href="{{ url_for('translator_page') }}">Open translator</a>
+      <a class="btn secondary" href="#features">See what it does</a>
+    </div>
+    <p class="muted-small">Guest tools are available immediately. Saved notes stay in your local workspace.</p>
+  </div>
+  <div class="stage" aria-label="Example of notes being translated">
+    <div class="live">
+      <div class="live-top"><i></i><i></i><i></i></div>
+      <small>Introduction to Biology</small>
+      <div class="src">Photosynthesis is how plants make food from light.</div>
+      <div class="out" id="liveOut" lang="sw">Usanisinuru ni jinsi mimea inavyotengeneza chakula kutokana na mwanga.</div>
+      <div class="chips" id="liveChips">
+        <span class="chip on">Kiswahili</span><span class="chip">Français</span><span class="chip">Español</span><span class="chip">Deutsch</span>
+      </div>
     </div>
   </div>
-  <div class="hero-art" aria-hidden="true"><div class="hero-orb">文</div></div>
 </section>
 
-<div class="dashboard-grid">
-  <section>
-    <div class="card-heading" style="margin-top:5px">
-      <div><h2>Your study toolkit</h2><p>Pick up where you need a hand.</p></div>
-    </div>
-    <div class="quick-grid">
-      <a class="quick-card" href="{{ url_for('translator_page') }}"><span class="quick-icon">文</span><strong>Translate materials</strong><span>Notes, text and documents</span></a>
-      <a class="quick-card" href="{{ url_for('quiz_page') }}"><span class="quick-icon">✳</span><strong>Practice a quiz</strong><span>Try a question in English or Kiswahili</span></a>
-      <a class="quick-card" href="{{ url_for('notes_page') }}"><span class="quick-icon">▤</span><strong>Keep study notes</strong><span>Save ideas in your workspace</span></a>
-      <a class="quick-card" href="{{ url_for('help_desk') }}"><span class="quick-icon">？</span><strong>Ask the help desk</strong><span>Housing, fees and deadlines</span></a>
-    </div>
-  </section>
-  <section class="card">
-    <div class="card-heading"><div><h2>USIU-Africa information</h2><p>Official public university pages</p></div><a class="link-button" href="{{ url_for('help_desk') }}">Browse help desk →</a></div>
-    <div class="deadline-list">
-      {% for item in resources[:4] %}
-      <div class="deadline"><div class="date-pill" aria-hidden="true">{{ item.icon }}</div><div><strong>{{ item.title }}</strong><small>{{ item.category }} · Verify current details on the official page.</small></div></div>
-      {% endfor %}
-    </div>
-  </section>
+<div class="langs" aria-label="Supported languages">
+  <span>Kiswahili</span><span>English</span><span>Français</span><span>Español</span><span>Deutsch</span><span>العربية</span>
 </div>
-<div class="notice" style="margin-top:20px">Polystudy links to public USIU-Africa information. It is not connected to private student records, admissions, billing, or university systems.</div>
+
+<section class="section" id="features">
+  <div class="section-head"><h2>Tools for your study routine</h2><p>Go from course materials to understanding and practice in one place.</p></div>
+  <div class="grid">
+    <a class="card" href="{{ url_for('translator_page') }}"><div class="icon i1">文</div><h3>Translated study notes</h3><p>Translate text and PDF, TXT, or Markdown documents.</p></a>
+    <a class="card" href="{{ url_for('quiz_page') }}"><div class="icon i2">✓</div><h3>Bilingual quizzes</h3><p>Practise in English or Kiswahili and review explanations.</p></a>
+    <a class="card" href="{{ url_for('help_desk') }}"><div class="icon i3">Aa</div><h3>Course glossary</h3><p>Browse shared Supabase terms and translations.</p></a>
+    <a class="card" href="{{ url_for('notes_page') }}"><div class="icon i4">▤</div><h3>Saved materials</h3><p>Keep study notes together in your local workspace.</p></a>
+    <a class="card" href="{{ url_for('resources_page') }}"><div class="icon i5">⌕</div><h3>Research library</h3><p>Search open-access scholarly works through OpenAlex.</p></a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>How it works</h2><p>Three steps from a course document to revision.</p></div>
+  <div class="steps">
+    <article class="card"><h3>Add your notes</h3><p>Choose text or upload a supported document.</p></article>
+    <article class="card"><h3>Pick a study tool</h3><p>Translate, practise, save, or search research.</p></article>
+    <article class="card"><h3>Review and save</h3><p>Revisit explanations and keep your study notes.</p></article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Supabase glossary</h2><p>Live shared terms from the connected database.</p></div>
+  <div class="grid">
+    {% for entry in supabase_entries %}
+    <article class="card"><div class="eyebrow">{{ entry.language }}</div><h3>{{ entry.term_en }}</h3><p>{{ entry.term_translated }}</p></article>
+    {% else %}
+    <article class="card"><h3>Database not loaded</h3><p>Check the Supabase server configuration and glossary table.</p></article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="cta"><h2>Ready to study in your language?</h2><p>Translate your first text or document.</p><a class="btn secondary" href="{{ url_for('translator_page') }}">Get started</a></section>
 {% endblock %}

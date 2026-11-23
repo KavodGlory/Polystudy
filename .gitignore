@@ -17,6 +17,7 @@ ENV/
 # Local databases and SQLite sidecar files (may contain user data)
 *.db
 *.db-*
+*.db.backup
 *.sqlite
 *.sqlite3
 

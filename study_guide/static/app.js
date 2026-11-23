@@ -2,7 +2,23 @@
   "use strict";
 
   const $ = (selector, root = document) => root.querySelector(selector);
-  document.querySelectorAll(".nav-link, .quick-card").forEach((link) => {
+  const root = document.documentElement;
+  const savedTheme = (() => {
+    try { return localStorage.getItem("ps-theme"); } catch (_) { return null; }
+  })();
+  if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    root.dataset.theme = "dark";
+  }
+  const themeToggle = $("#themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const theme = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = theme;
+      try { localStorage.setItem("ps-theme", theme); } catch (_) {}
+    });
+  }
+
+  document.querySelectorAll(".nav-links a, .quick-card").forEach((link) => {
     link.addEventListener("click", (event) => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = new URL(link.href, window.location.href);
@@ -16,6 +32,44 @@
       window.setTimeout(() => window.location.assign(target.href), 120);
     });
   });
+
+  const liveOut = $("#liveOut");
+  if (liveOut) {
+    const liveTranslations = [
+      ["sw", "Usanisinuru ni jinsi mimea inavyotengeneza chakula kutokana na mwanga."],
+      ["fr", "La photosynthèse est la façon dont les plantes fabriquent leur nourriture grâce à la lumière."],
+      ["es", "La fotosíntesis es cómo las plantas fabrican su alimento a partir de la luz."],
+      ["de", "Fotosynthese ist der Vorgang, bei dem Pflanzen aus Licht Nahrung herstellen."]
+    ];
+    let liveIndex = 0;
+    window.setInterval(() => {
+      liveOut.classList.add("fade");
+      window.setTimeout(() => {
+        liveIndex = (liveIndex + 1) % liveTranslations.length;
+        liveOut.lang = liveTranslations[liveIndex][0];
+        liveOut.textContent = liveTranslations[liveIndex][1];
+        document.querySelectorAll("#liveChips .chip").forEach((chip, index) => {
+          chip.classList.toggle("on", index === liveIndex);
+        });
+        liveOut.classList.remove("fade");
+      }, 350);
+    }, 3600);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        observer.unobserve(entry.target);
+        window.setTimeout(() => entry.target.classList.remove("reveal", "in"), 800);
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".card, .faq-item, .cta, .langs").forEach((element) => {
+      element.classList.add("reveal");
+      observer.observe(element);
+    });
+  }
 
   async function fetchJson(url, options) {
     const response = await fetch(url, options);
@@ -308,6 +362,17 @@
         stage.append(result, summary);
         status.textContent = "Session complete.";
         nextButton.hidden = true;
+        fetchJson("/api/supabase/quiz-result", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            score: questions.length
+              ? Math.round((score / questions.length) * 100)
+              : 0
+          })
+        }).catch(() => {
+          // Supabase is optional; local quiz completion still works without it.
+        });
         return;
       }
       renderQuestion();
@@ -338,7 +403,7 @@
     }
   }
 
-  // Multilingual public university links
+  // Supabase glossary links
   const helpLanguage = $("#help-language");
   if (helpLanguage) {
     const results = $("#help-results");
@@ -363,13 +428,7 @@
           title.textContent = item.title;
           const body = document.createElement("p");
           body.textContent = item.body;
-          const source = document.createElement("a");
-          source.className = "link-button";
-          source.href = item.source_url;
-          source.target = "_blank";
-          source.rel = "noopener noreferrer";
-          source.textContent = "Open official source →";
-          content.append(category, title, body, source);
+          content.append(category, title, body);
           top.append(icon, content);
           article.append(top);
           results.append(article);
@@ -382,7 +441,7 @@
       }
     }
     helpLanguage.addEventListener("change", loadHelp);
-    if (helpLanguage.value !== "en") loadHelp();
+    loadHelp();
   }
 
   // OpenAlex open-access research catalog

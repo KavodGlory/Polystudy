@@ -1,4 +1,4 @@
-"""[{"id": "habari","category": "greetings","aliases": ["habari","habari yako","habari gani"
+[{"id": "habari","category": "greetings","aliases": ["habari","habari yako","habari gani"
 ],
 "source_language": "Swahili",
 "register": "standard",
@@ -1635,4 +1635,4 @@
 "needs_review": true,
 "review_note": "Slang; confirm usage."
 }
-]"""
+]

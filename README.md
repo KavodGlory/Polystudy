@@ -66,6 +66,16 @@ environment settings for persistent configuration.
 
 ## Run an application
 
+On Windows, double-click `run_polystudy.bat` or run:
+
+```powershell
+.\run_polystudy.ps1
+```
+
+The launcher creates or reuses `.venv`, installs dependencies, and starts
+POLYSTUDY on `http://127.0.0.1:5000`. If Chrome has an old cached page, use a
+hard refresh or close and reopen the tab.
+
 Start **one** of these from the project directory:
 
 ```sh
@@ -107,6 +117,20 @@ put the API key in application code or browser JavaScript.
 The research search uses OpenAlex and needs an internet connection for new
 searches. Search metadata is cached locally.
 
+### Supabase teammate database
+
+The teammate database is optional and is used for glossary lookups and quiz
+score writes. Set it on the server before starting POLYSTUDY:
+
+```powershell
+$env:SUPABASE_URL = "https://ozqompzquetevyanjqqf.supabase.com"
+$env:SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7_9o_2hJ5kiGF7nRlr7rBw_bzf5u2XX"
+```
+
+`SUPABASE_ANON_KEY` is also accepted as the key variable name. Do not replace
+these with the Supabase service-role key in a browser or local public app.
+The app only connects to the `glossary` and `quiz_results` tables.
+
 ## Run tests
 
 Install the requirements, then run:
@@ -130,6 +154,8 @@ credentials.
 | `KARIBU_MAX_DOC_CHARS` | Maximum extracted document text (default: 150,000 characters). |
 | `JOTFORM_API_KEY` | Optional server-side key for reading Jotform form details. |
 | `JOTFORM_QUIZ_FORM_ID` | Optional Jotform form ID. |
+| `SUPABASE_URL` | Supabase project URL. |
+| `SUPABASE_PUBLISHABLE_KEY` | Supabase publishable or anon key for the glossary and quiz APIs. |
 | `FLASK_SECRET` | Optional persistent Flask session secret for POLYSTUDY. |
 
 AI provider usage may incur charges or be subject to provider quotas. Review

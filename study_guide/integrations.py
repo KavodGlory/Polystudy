@@ -18,6 +18,8 @@ JOTFORM_API_BASE = "https://api.jotform.com"
 OPENALEX_API = "https://api.openalex.org/works"
 OPENALEX_CACHE_SECONDS = 6 * 60 * 60
 JOTFORM_CACHE_SECONDS = 10 * 60
+DEFAULT_SUPABASE_URL = "https://ozqompzquetevyanjqqf.supabase.com"
+DEFAULT_SUPABASE_KEY = "sb_publishable_7_9o_2hJ5kiGF7nRlr7rBw_bzf5u2XX"
 
 
 class IntegrationError(Exception):
@@ -25,6 +27,132 @@ class IntegrationError(Exception):
 
 
 _jotform_cache: dict[str, tuple[float, dict]] = {}
+
+
+class SupabaseClient:
+    """Read and write the teammate's Supabase glossary and quiz tables."""
+
+    def __init__(
+        self,
+        url: str | None = None,
+        api_key: str | None = None,
+        timeout: int = 10,
+    ):
+        self.url = (url or os.environ.get("SUPABASE_URL", DEFAULT_SUPABASE_URL)).strip().rstrip("/")
+        self.api_key = (
+            api_key
+            if api_key is not None
+            else (
+                os.environ.get("SUPABASE_ANON_KEY")
+                or os.environ.get("SUPABASE_PUBLISHABLE_KEY")
+                or os.environ.get("SUPABASE_KEY")
+                or DEFAULT_SUPABASE_KEY
+            )
+        ).strip()
+        self.timeout = timeout
+
+    @property
+    def configured(self) -> bool:
+        try:
+            parsed = urlparse(self.url)
+        except ValueError:
+            return False
+        return bool(
+            parsed.scheme == "https"
+            and parsed.netloc
+            and self.api_key
+        )
+
+    @property
+    def configuration_error(self) -> str:
+        if not self.api_key:
+            return "Set SUPABASE_ANON_KEY or SUPABASE_PUBLISHABLE_KEY on the server."
+        if not self.url or not re.fullmatch(r"https://[A-Za-z0-9.-]+(?:/[A-Za-z0-9.-]*)*", self.url):
+            return "Set SUPABASE_URL to a valid HTTPS Supabase project URL."
+        return ""
+
+    def _headers(self) -> dict[str, str]:
+        return {
+            "apikey": self.api_key,
+            "Authorization": f"Bearer {self.api_key}",
+            "Accept": "application/json",
+        }
+
+    def _request(self, path: str, method: str = "GET", payload: dict | None = None) -> object:
+        if not self.configured:
+            raise IntegrationError(self.configuration_error)
+        candidates = [self.url]
+        if self.url.endswith(".supabase.com"):
+            candidates.append(self.url.replace(".supabase.com", ".supabase.co"))
+        raw = None
+        last_unavailable = None
+        for candidate in candidates:
+            body = None
+            headers = self._headers()
+            if payload is not None:
+                body = json.dumps(payload).encode("utf-8")
+                headers["Content-Type"] = "application/json"
+                headers["Prefer"] = "return=representation"
+            request = urllib.request.Request(
+                f"{candidate}{path}",
+                data=body,
+                headers=headers,
+                method=method,
+            )
+            try:
+                with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                    raw = response.read()
+                    self.url = candidate
+                    break
+            except urllib.error.HTTPError as exc:
+                if exc.code in (401, 403):
+                    raise IntegrationError("Supabase rejected the API key. Replace the configured Supabase key.") from exc
+                raise IntegrationError(f"Supabase returned an error ({exc.code}).") from exc
+            except (urllib.error.URLError, TimeoutError, OSError) as exc:
+                last_unavailable = exc
+        if raw is None:
+            raise IntegrationError("Supabase could not be reached. Try again shortly.") from last_unavailable
+        if not raw:
+            return []
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as exc:
+            raise IntegrationError("Supabase returned an invalid response.") from exc
+
+    def list_glossary(self, language: str | None = None, limit: int = 100) -> list[dict]:
+        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 500:
+            raise ValueError("Choose a glossary limit between 1 and 500.")
+        params = {
+            "select": "id,term_en,term_translated,language",
+            "limit": str(limit),
+            "order": "id.asc",
+        }
+        if language:
+            language = language.strip()
+            if not language or len(language) > 50:
+                raise ValueError("Choose a valid glossary language.")
+            params["language"] = f"eq.{language}"
+        data = self._request(f"/rest/v1/glossary?{urllib.parse.urlencode(params)}")
+        if not isinstance(data, list):
+            raise IntegrationError("Supabase returned an unexpected glossary response.")
+        return [
+            {
+                "id": row.get("id"),
+                "term_en": row.get("term_en"),
+                "term_translated": row.get("term_translated"),
+                "language": row.get("language"),
+            }
+            for row in data
+            if isinstance(row, dict)
+        ]
+
+    def save_quiz_result(self, score: int) -> dict:
+        if isinstance(score, bool) or not isinstance(score, int) or not 0 <= score <= 100:
+            raise ValueError("Quiz score must be an integer between 0 and 100.")
+        data = self._request("/rest/v1/quiz_results", "POST", {"score": score})
+        if isinstance(data, list) and data:
+            return data[0] if isinstance(data[0], dict) else {"score": score}
+        return {"score": score}
 
 
 def configured_jotform_form_id() -> str:
