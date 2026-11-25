@@ -123,7 +123,7 @@ The teammate database is optional and is used for glossary lookups and quiz
 score writes. Set it on the server before starting POLYSTUDY:
 
 ```powershell
-$env:SUPABASE_URL = "https://ozqompzquetevyanjqqf.supabase.com"
+$env:SUPABASE_URL = "https://ozqompzquetevyanjqqf.supabase.co"
 $env:SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7_9o_2hJ5kiGF7nRlr7rBw_bzf5u2XX"
 ```
 

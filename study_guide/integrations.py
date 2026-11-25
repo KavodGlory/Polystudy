@@ -18,7 +18,7 @@ JOTFORM_API_BASE = "https://api.jotform.com"
 OPENALEX_API = "https://api.openalex.org/works"
 OPENALEX_CACHE_SECONDS = 6 * 60 * 60
 JOTFORM_CACHE_SECONDS = 10 * 60
-DEFAULT_SUPABASE_URL = "https://ozqompzquetevyanjqqf.supabase.com"
+DEFAULT_SUPABASE_URL = "https://ozqompzquetevyanjqqf.supabase.co"
 DEFAULT_SUPABASE_KEY = "sb_publishable_7_9o_2hJ5kiGF7nRlr7rBw_bzf5u2XX"
 
 
